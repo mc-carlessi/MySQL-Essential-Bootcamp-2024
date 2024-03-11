@@ -133,12 +133,12 @@ Run this command but <span style="color:red"> don’t confirm </span>
     ```
 7. Which databases are installed by default?
 
-| Database |
-|---|
-| information_schema |
-! mysql |
-| performance_schema |
-| sys |
+   | Database |  
+   | --- |  
+   | information_schema |  
+   ! mysql |  
+   | performance_schema |   
+   | sys |  
 
 
     ```
