@@ -27,7 +27,7 @@ In this workshop, you will learn how to work with:
 * Database Design - MySQL Tables, JSON, Document Store
 * Security - MySQL Users, Roles, Firewall, Audit and Masking
 * MySQL Backup - Logical and Enterprise Backup
-* High Availability - Replication and INNODB Cluster
+* High Availability - Replication and InnoDB Cluster
 * MySQL Enterprise Monitor - Manager, Agent
 * MySQL Database Service
 

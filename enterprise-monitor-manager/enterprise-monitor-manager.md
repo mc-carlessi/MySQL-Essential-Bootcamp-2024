@@ -115,7 +115,7 @@ In this lab, you will:
 
 1. If not already connected, connect to app-srv and retrieve the Private IP with the OCI dashboard or the linux command. This IP will be used to connect the agent to the Monitor Service
     ```
-    <span style="color:green">shell-app-srv$</span><copy>ifconfig | grep 10.0.10</copy>
+    <span style="color:green">shell-app-srv$</span><copy>ifconfig | grep 10.0.</copy>
     ```
 
     Write down the App-srv PRIVATE ip (client_ip)
@@ -153,28 +153,6 @@ In this lab, you will:
 
 6. Click “Edit Instance” button
 7. Now do you see the host mysql1 as target?
-
-## Task 3: Add a workload (Optional)
-1. Don’t install the agent on mysql2 and mysql3.
-    Add mysql2 and mysql3 as you did for mysql1 with monitoring from MEM Bult-in Agent”
-2. Check replication statistics
-    * In “Global Summaries” menu select “Replication 1”
-    * In “All Targets” box select your “GR cluster” (scroll down the list to find it)
-    * Select Replication from left menu
-    ![MYSQLEE](images/monitor-check-replication.png "monitor check replication")
-
-3. Visualize replication topology: select from left menu “Topology”
-    * As target select your GR cluster
-    * From left menu choose Topology
-    ![MYSQLEE](images/monitor-check-topology.png "monitor check topology")
-4.  Add some load on your server to watch graphics change
-    * From app-srv run the test tool “mysqlslap”, available in all MySQL server and client installations (below command is expected to run for a long time, to give you the time to see the peak):
-        ```
-        <span style="color:green">shell-app-srv$</span><copy>mysqlslap --user=admin --password --host=app-srv --port=6446 --concurrency=20 --iterations=30 --number-int-cols=5 --number-char-cols=20 --auto-generate-sql --auto-generate-sql-guid-primary</copy>
-        ```
-    * Check behavior in MEM, can you see the peaks?
-
-
 
 
 ## Learn More

@@ -46,7 +46,7 @@ Run this command but <span style="color:red"> don’t confirm </span>
 6. Because a non-updated PGPkey please run
 
     ```
-    <span style="color:green">shell-mysql1></span><copy> sudo rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022 </copy>
+    <span style="color:green">shell-mysql1></span><copy> sudo rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2023 </copy>
     ```
 
 7. Oracle Linux 8 already have the official MySQL repository, but to show you how to do it, we install it from the package downloading from https://dev.mysql.com/downloads/
@@ -132,6 +132,14 @@ Run this command but <span style="color:red"> don’t confirm </span>
     <span style="color:blue">mysql></span><copy>status; </copy>
     ```
 7. Which databases are installed by default?
+
+| Database |
+|---|
+| information_schema |
+! mysql |
+| performance_schema |
+| sys |
+
 
     ```
     <span style="color:blue">mysql></span><copy> show databases; </copy>
