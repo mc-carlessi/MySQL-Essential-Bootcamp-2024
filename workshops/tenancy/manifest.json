@@ -29,8 +29,12 @@
             "filename": "../../mysql-shell/mysql-shell.md"
         },
         {
-            "title": "Lab 3: Database Design",
+            "title": "Lab 3a: Database Design",
             "filename": "../../database-design/database-design.md"
+        },
+        {
+            "title": "Lab 3b: JSON datatype and MySQL Document Store",
+            "filename": "../../database-design/database-design-json.md"
         },
         {
             "title": "Lab 4a: User management",
