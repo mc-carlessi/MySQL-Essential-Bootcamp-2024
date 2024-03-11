@@ -61,45 +61,6 @@ Don’t be confused by the client version and check these lines, to understand �
     <span style="color:green">shell-mysql1></span><copy>mysql -uadmin -p -P3307 -h mysql1 < ./employees.sql</copy>
     ```
 
-## Task 3: Run SQL statements
-Have a look to these useful SQL Statements:
-    ```
-    <span style="color:green">shell-mysql1></span><copy>mysql -uadmin -p -h mysql1 -P 3307</copy>
-    ```
-    ```
-    <span style="color:blue">mysql></span><copy>SHOW VARIABLES LIKE "%version%";</copy>
-    ```
-    ```
-    <span style="color:blue">mysql></span><copy>SELECT table_name, engine FROM INFORMATION_SCHEMA.TABLES WHERE engine <> 'InnoDB';</copy>
-    ```
-    ```
-    <span style="color:blue">mysql></span><copy>SELECT table_name, engine FROM INFORMATION_SCHEMA.TABLES WHERE engine = 'InnoDB';</copy>
-    ```
-    ```
-    <span style="color:blue">mysql></span><copy>SELECT table_name, engine FROM INFORMATION_SCHEMA.TABLES where engine = 'InnoDB' and table_schema not in ('mysql','information_schema', 'sys');</copy>
-    ```
-    ```
-    <span style="color:blue">mysql></span><copy>SELECT ENGINE, COUNT(*), SUM(DATA_LENGTH)/ 1024 / 1024 AS 'Data MB', SUM(INDEX_LENGTH)/1024 / 1024 AS 'Index MB' FROM information_schema.TABLEs group by engine;</copy>
-    ```
-    ```
-    <span style="color:blue">mysql></span><copy>SELECT table_schema AS 'Schema', SUM( data_length ) / 1024 / 1024 AS 'Data MB', SUM( index_length ) / 1024 / 1024 AS 'Index MB', SUM( data_length + index_length ) / 1024 / 1024 AS 'Sum' FROM information_schema.tables GROUP BY table_schema ;</copy>
-    ```
-
-The “\G” is like “;” with a different way to show results
-    ```
-    <span style="color:blue">mysql></span><copy>SHOW GLOBAL VARIABLES\G</copy>
-    ```
-    ```
-    <span style="color:blue">mysql></span><copy>SHOW GLOBAL STATUS\G</copy>
-    ```
-    ```
-    <span style="color:blue">mysql></span><copy>SHOW FULL PROCESSLIST;</copy>
-    ```
-    ```
-    <span style="color:blue">mysql></span><copy>SHOW ENGINE INNODB STATUS\G</copy>
-    ```
-
-
 ## Acknowledgements
 * **Author** - Marco Carlessi, Principal Sales Consultant
 * **Contributors** -  Perside Foster, MySQL Solution Engineering, Selena Sánchez, MySQL Solutions Engineer

@@ -82,20 +82,6 @@ In this lab, you will:
     ```
     <span style="color:blue">mysql></span><copy>ANALYZE TABLE city_part;</copy>
     ```
-14. If you are not connected to mysql1, do it now
-15. Create partitions:
-    * Check the files for the city_part table on your disk
-        ```
-        <span style="color:green">shell-mysql1></span><copy>ls -l /mysql/data/world</copy>
-        ```
-    * Partition your table into 5 segments based on hash
-        ```
-        <span style="color:green">shell-mysql1></span><copy>ALTER TABLE world.city_part PARTITION BY HASH (id) PARTITIONS 5;</copy>
-        ```
-    * Check the file of the city_part table on your disk
-        ```
-        <span style="color:green">shell-mysql1></span><copy>ls -l /mysql/data/world</copy>
-        ```
 
 
 ## Task 2: Work with JSON
