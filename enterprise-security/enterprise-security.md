@@ -1,4 +1,4 @@
-# MySQL Enterprise Firewall
+# MySQL Enterprise Security
 
 ## Introduction
 MySQL Enterprise offers important security extension, we now works with some of them.  
@@ -251,28 +251,6 @@ In this lab, you will work with:
         ```
         <span style="color:blue">mysql></span><copy>SELECT gen_rnd_email(6, 8, 'mynet.com');</copy>
         ```
-5. Create a view with masked data
-    ```
-    <span style="color:blue">mysql></span><copy>use world;</copy>
-    ```
-    ```
-    <span style="color:blue">mysql></span><copy>show tables;</copy>
-    ```
-    ```
-    <span style="color:blue">mysql></span><copy>show tables;</copy>
-    ```
-    ```
-    <span style="color:blue">mysql></span><copy>show tables;</copy>
-    ```
-    ```
-    <span style="color:blue">mysql></span><copy>show tables;</copy>
-    ```
-    ```
-    <span style="color:blue">mysql></span><copy>show tables;</copy>
-    ```
-    ```
-    <span style="color:blue">mysql></span><copy>show tables;</copy>
-    ```
 
 
 ## Learn More
