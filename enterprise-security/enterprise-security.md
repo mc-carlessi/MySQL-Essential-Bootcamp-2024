@@ -143,7 +143,7 @@ In this lab, you will work with:
 
 2. Enable Audit using the pre-configured script in the share directory of your MySQL installation, and verify that the script return the message "OK" 
     ```
-    <span style="color:green">shell-mysql1></span><copy>mysql -uadmin -p -P3307 -h mysql1 < /mysql/mysql-latest/share/audit_log_filter_linux_install.sql</copy>
+    <span style="color:green">shell-mysql1></span><copy>mysql -uadmin -p -P3307 -h mysql1 mysql < /mysql/mysql-latest/share/audit_log_filter_linux_install.sql</copy>
     ```
 
 3. Connect to the instance with administrative account
