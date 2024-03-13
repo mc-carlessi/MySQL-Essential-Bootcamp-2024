@@ -136,7 +136,6 @@ In this lab, you will work with:
     ```
     <span style="color:blue">mysql></span><copy>CALL mysql.sp_set_firewall_mode('fwtest@%', 'OFF');</copy>
     ```
-    ```
  
 ## Task 2: MySQL Enterprise Audit
 

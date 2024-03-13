@@ -61,6 +61,7 @@ Create a new user/group for your MySQL service (mysqluser/mysqlgrp) and a add �
     <span style="color:green">shell-mysql1></span><copy>vi /home/opc/.bashrc </copy>
     ```
 6. <span style="color:red">Close the ssh session and reopen it to activate the new privilege and settings for opc user</span>
+
 7. Extract the tarball in your /mysql folder
     ```
     <span style="color:green">shell-mysql1></span><copy>cd /mysql/ </copy>
@@ -116,29 +117,20 @@ Please note that, because the port 3306 is already in use by the community serve
     ```
     <span style="color:green">shell-mysql1></span><copy>grep -i 'temporary password' /mysql/log/err_log.log</copy>
     ```
-17. Before version 5.7 it was recommended to run the ' mysql\_secure\_installation ' script. From version 5.7 all these settings are “by default”, but the script can be used also to setup the validate\_password plugin (used later).
-    Execute now mysql\_secure\_installation
-    ```
-    <span style="color:green">shell-mysql1></span><copy>/mysql/mysql-latest/bin/mysql_secure_installation -h127.0.0.1 -P3307</copy>
-    ```
-    using these values
-    * root password: retrieved from previous step
-    * new password: Welcome1!
-    * setup VALIDATE PASSWORD component: Y
-    * password validation policy: 2 
-    * Change the password for root: N
-    * Remove anonymous users: Y
-    * Disallow root login remotely: N
-    * Remove test database: Y
-    * Reload privilege tables now: Y
 
-18. Login to you mysql-advanced installation and check the status.
+17. Login to your mysql-advanced using the temporary password and set the new one
     ```
     <span style="color:green">shell-mysql1></span><copy>mysql -uroot -p -h 127.0.0.1 -P3307</copy>
     ```
     ```
+    <span style="color:blue">mysql></span><copy> SET PASSWORD='Welcome1!';</copy>
+    ```
+
+18. Check server status.
+    ```
     <span style="color:blue">mysql></span><copy>status</copy>
     ```
+
 19. Shutdown the service
     ```
     <span style="color:blue">mysql></span><copy>exit</copy>
@@ -146,6 +138,7 @@ Please note that, because the port 3306 is already in use by the community serve
     ```
     <span style="color:green">shell-mysql1></span><copy>mysqladmin -uroot -h127.0.0.1 -p -P3307 shutdown</copy>
     ```
+
 20. Configure automatic startup and shutdown with system.
 Add a systemd service unit configuration file with details about the MySQL service. The file is named mysqld.service and is placed in /usr/lib/systemd/system. We created one for you (See addendum for the content)
     ```

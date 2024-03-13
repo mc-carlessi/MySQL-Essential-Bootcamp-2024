@@ -219,6 +219,7 @@ In this lab, you will:
     ```
     <span style="color:green">shell-app-srv$</span><copy>sudo yum -y install /workshop/linux/mysql-router-commercial-8.0.*.x86_64.rpm</copy>
     ```
+
 2. Configure MySQL Router
     ```
     <span style="color:green">shell-app-srv$</span><copy>sudo mysqlrouter --bootstrap admin@mysql1:3307 --user=mysqlrouter --force-password-validation</copy>
@@ -227,10 +228,12 @@ In this lab, you will:
     Have a look on the output, note the following:
     * Read/Write Connections port: 
     * Read/Only Connections:
+
 3. Start MySQL Router
     ```
     <span style="color:green">shell-app-srv$</span><copy>sudo systemctl start mysqlrouter</copy>
     ```
+
 4. Test the connection with a mysql client connect to 6446 port (read/write). To which server are you currently connected? Can you change the content?
 
     ```

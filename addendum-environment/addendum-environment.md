@@ -111,9 +111,7 @@ This addendum contains the configuration files used for the labs.
     # Plugin load example (MySQL Enterprise Thread Pool)
     plugin-load=thread_pool.so;audit_log.so
 
-    audit_log=FORCE_PLUS_PERMANENT
     audit_log_rotate_on_size=20971520
-    audit_log_policy=Login
     ```
 
 ## Content of file my.cnf mysql3
@@ -168,6 +166,8 @@ This addendum contains the configuration files used for the labs.
     performance_schema_consumer_events_statements_history_long = ON
     # Plugin load example (MySQL Enterprise Thread Pool)
     plugin-load=thread_pool.so;audit_log.so
+
+    audit_log_rotate_on_size=20971520
     ```
 
 ## Content of mysqld-advanced

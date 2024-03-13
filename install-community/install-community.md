@@ -106,31 +106,31 @@ Run this command but <span style="color:red"> don’t confirm </span>
     ```
 
 2. Starting from MySQL 5.7 the default installation of MySQL Server generates a one-time password. You find it in error log notes above 
-
     ```
     <span style="color:green">shell-mysql1></span><copy>sudo grep 'temporary' /var/log/mysqld.log </copy>
     ```
 
 3. Login to MySQL using password retrieved in previous step
-
     ```
     <span style="color:green">shell-mysql1></span><copy>mysql -uroot -p -h localhost </copy>
     ```
-4. Try to run a command and write down the error message
 
+4. Try to run a command and write down the error message
     ```
     <span style="color:blue">mysql></span><copy>status</copy>
     ```
-5. Change root password
 
+5. Change root password
     ```
     <span style="color:blue">mysql></span><copy> ALTER USER 'root'@'localhost' IDENTIFIED BY 'Welcome1!';</copy>
     ```
+
 6. Retry command above, now it works
 
     ```
     <span style="color:blue">mysql></span><copy>status; </copy>
     ```
+
 7. Which databases are installed by default?
 
     ```
@@ -143,15 +143,11 @@ Run this command but <span style="color:red"> don’t confirm </span>
     ```
     <span style="color:blue">mysql></span><copy>show variables like "%version%"; </copy>
     ```
+
 9. Check default users in standard installation
 
     ```
-    <span style="color:blue">mysql></span><copy>select user, host from mysql.user where user='root'; </copy>
-    ```
-10. Logout as ‘root’ and connect as admin
-
-    ```
-    <span style="color:blue">mysql></span><copy> exit </copy>
+    <span style="color:blue">mysql></span><copy>select user, host, plugin from mysql.user where user='root'; </copy>
     ```
 
 ## Learn More
