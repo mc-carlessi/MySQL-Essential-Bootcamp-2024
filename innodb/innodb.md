@@ -211,14 +211,17 @@ In this lab, you will:
     ```
 
 
-## Task 4: Start MySQL Router
+## Task 4: Deploy MySQL Router
+> **Note:** 
+* By default MySQL router uses mysql_native_password (deprecated) for its user, we force the usage of the new chaching_sha2 with the option "--force-password-validation" at bootstrap time.
+
 1.  Install MySQL Router via rpm package
     ```
     <span style="color:green">shell-app-srv$</span><copy>sudo yum -y install /workshop/linux/mysql-router-commercial-8.0.*.x86_64.rpm</copy>
     ```
 2. Configure MySQL Router
     ```
-    <span style="color:green">shell-app-srv$</span><copy>sudo mysqlrouter --bootstrap admin@mysql1:3307 --user=mysqlrouter</copy>
+    <span style="color:green">shell-app-srv$</span><copy>sudo mysqlrouter --bootstrap admin@mysql1:3307 --user=mysqlrouter --force-password-validation</copy>
     ```
 
     Have a look on the output, note the following:

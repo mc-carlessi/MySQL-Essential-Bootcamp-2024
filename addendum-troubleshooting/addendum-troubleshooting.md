@@ -1,11 +1,11 @@
-# MySQL Enterprise Monitor
+# Addendum : Troubleshooting
 
 ## Introduction
 This addendum contains additional information and troubleshooting guides. 
 
 
-## Putty configuration 
- Steps to configure putty connection to OCI compute instances.
+## Trouble 1: Putty configuration 
+Steps to configure putty connection to OCI compute instances.
 1. Open putty
 
 2. Insert the public IP of your server and a mnemonic session name
@@ -24,7 +24,7 @@ This addendum contains additional information and troubleshooting guides.
     ![MYSQLEE](images/putty-save.png "putty save")
 
 
-## Troubleshooting: Windows Powershell SSH error on permissions 
+## Trouble 2: Windows Powershell SSH error on permissions 
 1. In case you are using powershell and you receive an error like
     
     ![MYSQLEE](images/powershell-permissions-error.png "powershell permissions error")

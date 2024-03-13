@@ -1,4 +1,4 @@
-# MySQL Enterprise Monitor
+# Addendum : Environment settings
 
 ## Introduction
 This addendum contains the configuration files used for the labs. 

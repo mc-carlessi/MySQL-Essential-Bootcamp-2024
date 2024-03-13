@@ -1,11 +1,12 @@
-# Addendum : Enviroment Creation
+# Addendum : Environment Creation
 
 ## Introduction
 This addendum contains environment creation instructions for an OCI tenancy.
 
 
-## Task 1
-> **Note:** * For more information on Oracle Cloud Console, please visit: https://docs.cloud.oracle.com/iaas/Content/GSG/Concepts/console.htm
+## Task 1: Login to your OCI tenancy
+> **Note:** 
+* For more information on Oracle Cloud Console, please visit: https://docs.cloud.oracle.com/iaas/Content/GSG/Concepts/console.htm
 
 1. Sign in to Oracle Cloud, please visit https://www.oracle.com/cloud/sign-in.html, enter your Cloud Account (tenancy name)
     ![MYSQLEE](./images/oci-sign-in-tenancy-page.png "oci sign in tenancy page")
