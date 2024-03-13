@@ -37,20 +37,12 @@
             "filename": "../../database-design-json/database-design-json.md"
         },
         {
-            "title": "Lab 4a: User management",
+            "title": "Lab 4a: User management and roles",
             "filename": "../../user-management/user-management.md"
         },
         {
-            "title": "Lab 4b: MySQL Enterprise Firewall",
-            "filename": "../../enterprise-firewall/enterprise-firewall.md"
-        },
-        {
-            "title": "Lab 4c: MySQL Enterprise Audit",
-            "filename": "../../enterprise-audit/enterprise-audit.md"
-        },
-        {
-            "title": "Lab 4d: MySQL Enterprise Mask and De-identification",
-            "filename": "../../enterprise-datamask/enterprise-datamask.md"
+            "title": "Lab 4b: MySQL Enterprise Security",
+            "filename": "../../enterprise-security/enterprise-security.md"
         },
         {
             "title": "Lab 5a: MySQL Logical Backup",
