@@ -65,16 +65,20 @@
             "filename": "../../enterprise-monitor-manager/enterprise-monitor-manager.md"
         },
         {
-            "title": "Lab 9: MySQL HeatWave",
+            "title": "Lab 9: Demo MySQL HeatWave",
             "filename": "../../mysql-heatwave/mysql-heatwave.md"
         },
         {
-            "title": "Addendum 1",
-            "filename": "../../addendum/addendum.md"
+            "title": "Addendum 1: Troubleshooting",
+            "filename": "../../addendum-environment/addendum-troubleshooting.md"
         },
         {
-            "title": "Addendum 2",
+            "title": "Addendum 2: Environment settings",
             "filename": "../../addendum-environment/addendum-environment.md"
+        },
+        {
+            "title": "Addendum 3: Environment creation steps",
+            "filename": "../../addendum-environment-creation/addendum-environment-creation.md"
         },
         {
             "title": "Need Help?",
