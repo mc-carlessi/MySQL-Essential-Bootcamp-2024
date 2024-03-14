@@ -36,16 +36,14 @@ In this lab, you will:
   * Server version:
 
   | Command | Port 3306 or 3307? | SSL is used? | Socket or TCP connection? |
-  | --- + --- + --- + --- |
-  | mysql -u root -p <br> mysql> status; |   |   |   |
-  | mysql -u root -p -P 3306 <br> mysql> status; |   |   |   |
-  | mysql -u root -p -P 3307 <br> mysql> status; |   |   |   |
-  | mysql -u root -p -h localhost -P 3307 <br> mysql> status; |   |   |   |
-  | mysql -u root -p -h 127.0.0.1 -P 3307 <br> mysql> status; |   |   |   |
-  | mysql -u root -p -h mysql1 -P 3307 <br> mysql> status; |   |   |   |
+  | ------- | ------------------ | ------------ | ------------------------- |
+  | <span style="color:green">shell></span> mysql -u root -p<br> <span style="color:blue"> mysql></span> status; |   |   |   |
+  | <span style="color:green">shell></span> mysql -u root -p -P **3306** <br> <span style="color:blue"> mysql></span> status; |   |   |   |
+  | <span style="color:green">shell></span> mysql -u root -p -P **3307** <br> <span style="color:blue"> mysql></span> status; |   |   |   |
+  | <span style="color:green">shell></span> mysql -u root -p -h **localhost** -P **3307** <br> <span style="color:blue"> mysql></span> status; |   |   |   |
+  | <span style="color:green">shell></span> mysql -u root -p -h **127.0.0.1** -P **3307** <br> <span style="color:blue"> mysql></span> status; |   |   |   |
+  | <span style="color:green">shell></span> mysql -u root -p -h **mysql1** -P **3307** <br> <span style="color:blue"> mysql></span> status; |   |   |   |
 
-
-![MYSQLEE](./images/test-connections-table.png "test connections table")
 
 ## Task 2: Remove Community and import databases
 
