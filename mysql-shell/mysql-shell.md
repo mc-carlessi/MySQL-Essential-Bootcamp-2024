@@ -20,15 +20,15 @@ In this lab, you will execute MySQL Shell and explore the following on the inter
 
 1. If not already connected, connect to mysql1 server through app-srv
     ```
-    <span style="color:green">shell-app-srv$</span><copy>ssh -i $HOME/sshkeys/id_rsa_mysql1 opc@mysql1</copy>
+    <span style="color:green">shell-app-srv$</span> <copy>ssh -i $HOME/sshkeys/id_rsa_mysql1 opc@mysql1</copy>
     ```
 2. Install Mysql Shell, a new client that can be used in devOps organizations (you’ll learn more about it during the course) 
     ```
-    <span style="color:green">shell-mysql1></span><copy>sudo yum install /workshop/linux/mysql-shell-commercial-8.0.*.rpm</copy>
+    <span style="color:green">shell-mysql1></span> <copy>sudo yum install /workshop/linux/mysql-shell-commercial-8.0.*.rpm</copy>
     ```
 3. Launch MySQL shell
     ```
-    <span style="color:green">shell-mysql1></span><copy>mysqlsh</copy>
+    <span style="color:green">shell-mysql1></span> <copy>mysqlsh</copy>
     ```
 4. Discover the command auto-completion feature, type \h and press TAB twice
     ```
@@ -53,7 +53,7 @@ In this lab, you will execute MySQL Shell and explore the following on the inter
     <span style="color:blue">My</span><span style="color: orange">SQL </span><span style="background-color:yellow">JS</span>><copy>exit</copy>
     ```
     ```
-    <span style="color:green">shell-mysql1></span><copy>mysqlsh</copy>
+    <span style="color:green">shell-mysql1></span> <copy>mysqlsh</copy>
     ```
 
 ## Task 2: MySQL as a SQL Client
@@ -98,16 +98,16 @@ In this lab, you will execute MySQL Shell and explore the following on the inter
     ```
 6. Command line connection from MySQL Client and MySQL Shell are similar (just specify “--sql”). Try these:
     ```
-    <span style="color:green">shell-mysql1></span><copy>mysql -uadmin -p -hmysql1 -P3307</copy>
+    <span style="color:green">shell-mysql1></span> <copy>mysql -uadmin -p -hmysql1 -P3307</copy>
     ```
     ```
-    <span style="color:blue">mysql></span><copy>SHOW DATABASES;</copy>
+    <span style="color:blue">mysql></span> <copy>SHOW DATABASES;</copy>
     ```
     ```
-    <span style="color:blue">mysql></span><copy>exit</copy>
+    <span style="color:blue">mysql></span> <copy>exit</copy>
     ```
     ```
-    <span style="color:green">shell-mysql1></span><copy>mysqlsh --sql -uadmin -p -hmysql1 -P3307</copy>
+    <span style="color:green">shell-mysql1></span> <copy>mysqlsh --sql -uadmin -p -hmysql1 -P3307</copy>
     ```
     ```
     <span style="color:blue">My</span><span style="color: orange">SQL </span><span style="color:white"><span style="background-color:orange">SQL</span></span>><copy>SHOW DATABASES;</copy>

@@ -49,24 +49,25 @@ In this lab, you will:
 
 1. Now that we better understood how to connect, we can remove the community installation and refresh PATH cache 
     ```
-    <span style="color:green">shell-mysql1></span><copy>sudo yum remove mysql mysql-server</copy>
+    <span style="color:green">shell-mysql1></span> <copy>sudo yum remove mysql mysql-server</copy>
     ```
 
+2. Then refresh tha bash shell to not try to use the old installation
     ```
     <span style="color:green">shell-mysql1></span><copy>hash -r</copy>
     ```
 
-5. Import the world database, that will be used later, from c:\workshop\databases\world. You can do it with mysql client
+3. Import the world database, that will be used later, from c:\workshop\databases\world. You can do it with mysql client
     ```
-    <span style="color:green">shell-mysql1></span><copy>mysql -uadmin -p -P3307 -h mysql1 </workshop/databases/world/world.sql</copy>
+    <span style="color:green">shell-mysql1></span> <copy>mysql -uadmin -p -P3307 -h mysql1 </workshop/databases/world/world.sql</copy>
     ```
 
-6. Import the employees demo database that is in /workshop/databases folder.
+4. Import the employees demo database that is in /workshop/databases folder.
     ```
-    <span style="color:green">shell-mysql1></span><copy>cd /workshop/databases/employees</copy>
+    <span style="color:green">shell-mysql1></span> <copy>cd /workshop/databases/employees</copy>
     ```
     ```
-    <span style="color:green">shell-mysql1></span><copy>mysql -uadmin -p -P3307 -h mysql1 < ./employees.sql</copy>
+    <span style="color:green">shell-mysql1></span> <copy>mysql -uadmin -p -P3307 -h mysql1 < ./employees.sql</copy>
     ```
 
 ## Acknowledgements

@@ -41,18 +41,22 @@ If not already connected to app-srv and mysql1 then do the following
     ```
     <span style="color:green">shell></span><copy>sudo chmod 770 /mysql/exports/</copy>
     ```
+
 2. Export all the data with mysqldump
     ```
     <span style="color:green">shell></span><copy>mysqldump -uadmin -p -hmysql1 -P3307 --single-transaction --events --routines --flush-logs --all-databases > /mysql/exports/full.sql</copy>
     ```
-3. view  the content of the file /mysql/exports/full.
+
+3. View  the content of the file /mysql/exports/full.
     ```
-    <span style="color:green">shell></span><copy>cat /mysql/exports/full.sql</copy>
+    <span style="color:green">shell></span><copy>nano /mysql/exports/full.sql</copy>
     ```
+
 4. Export employees database
     ```
     <span style="color:green">shell></span><copy>mysqldump -uadmin -p -hmysql1 -P3307 --single-transaction --set-gtid-purged=OFF --databases employees > /mysql/exports/employees.sql</copy>
     ```
+
 5. Drop employees database
     ```
     <span style="color:green">shell></span><copy>mysql -uadmin -p -hmysql1 -P3307</copy>
@@ -66,6 +70,7 @@ If not already connected to app-srv and mysql1 then do the following
     ```
     <span style="color:blue">mysql></span><copy>show databases;</copy>
     ```
+
 6. Import the employees database.
     It can be done in shell (as when we loaded first example data) or from within the mysql client.
     ```
@@ -77,7 +82,8 @@ If not already connected to app-srv and mysql1 then do the following
     ```
     <span style="color:blue">mysql></span><copy>show tables in employees;</copy>
     ```
-7. Exit MySQL
+
+7. Exit from mysql client
     ```
     <span style="color:blue">mysql></span><copy>exit</copy>
     ```
