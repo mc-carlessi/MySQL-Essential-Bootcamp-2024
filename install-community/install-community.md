@@ -136,7 +136,17 @@ Run this command but <span style="color:red"> don’t confirm </span>
     ```
     <span style="color:blue">mysql></span><copy> show databases; </copy>
     ```
-    ![MYSQLEE](./images/show-databases.png "show databases")
+    ```
+    +--------------------+
+    | Database           |
+    +--------------------+
+    | information_schema |
+    | mysql              |
+    | performance_schema |
+    | sys                |
+    +--------------------+
+    4 rows in set (0.00 sec)
+    ```
 
 8. To see which version of MySQL you are using submit the command
 
@@ -147,7 +157,7 @@ Run this command but <span style="color:red"> don’t confirm </span>
 9. Check default users in standard installation
 
     ```
-    <span style="color:blue">mysql></span><copy>select user, host, plugin from mysql.user where user='root'; </copy>
+    <span style="color:blue">mysql></span><copy>select user, host from mysql.user where user='root'; </copy>
     ```
 
 ## Learn More

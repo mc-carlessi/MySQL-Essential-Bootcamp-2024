@@ -33,6 +33,7 @@ In this lab, you will:
     <span style="color:green">shell-mysql1></span><copy> sudo yum install -y ncurses-compat-libs </copy>
     ```
 1. Now we install the service. If not already connected, connect to app-srv with your SSH client
+
 2. Install the MySQL Enterprise Monitor Service Manager on app-srv
     ```
     <span style="color:green">shell-app-srv$</span><copy>cd /workshop/linux/monitor</copy>
@@ -46,10 +47,12 @@ In this lab, you will:
     ![MYSQLEE](images/monitor-installer-questions-part1.png "monitor installer questions part1")
     ![MYSQLEE](images/monitor-installer-questions-part2.png "monitor installer questions part2")
     ![MYSQLEE](images/monitor-installer-questions-part3.png "monitor installer questions part3")
+
 3. On app-srv: Check the status of the MySQL Monitor
     ```
     <span style="color:green">shell-app-srv$</span><copy>sudo /opt/mysql/enterprise/monitor/mysqlmonitorctl.sh status</copy>
     ```
+
 4. On app-srv: After the successful installation connect to the newly installed service with a web browser on the address from your laptop (please use the public IP and be patient, startup may require few minutes depending on VM resources)
     ```
     <copy>https://<app-srv_public_ip>:18443</copy>
@@ -71,13 +74,17 @@ In this lab, you will:
     ```
 
 6. Click ‘Complete Setup’ button
+
 7. Choose your time zone and keep “English” for locale
     ![MYSQLEE](images/monitor-time-zone.png "monitor time zone")
+
 8. Now you are logged in and can configure to monitor your MySQL instances
+
 9. Connect your MEM to use mysql-advanced in agentless mode
     * On left side menu expand “Configuration” and select “MySQL Instances”. Click button “Add MySQL Instance”
     ![MYSQLEE](images/monitor-add-instance.png "monitor add instance")
-10. Insert connection data to your instance on mysql1
+
+10. Insert connection data to your instance on mysql1  
     ```
     Monitor From:<copy>MEM Built-in Agent</copy>
     Connect Using:<copy>TCP/IP</copy>
@@ -88,16 +95,29 @@ In this lab, you will:
     Auto-Create Less Privileged Users:<copy>No</copy>
     ```
     ![MYSQLEE](images/monitor-connect-instance.png "monitor connect instance")
+
+    > **Note:**
+        Due to a bug, before confirm execute these additional steps
+
+        1. In **"Connect Using"** box select "Socket"
+
+        2. In **"Connect Using"** box restore the previous value "TCP/IP"
+
 11. Now confirm with the button “Add Instance”
+
 12. You will see your instance in discovering
     ![MYSQLEE](images/monitor-instance-discovering.png "monitor instance discovering")
+
 13. After few seconds refresh your web browser page and you will see your instance connected
     ![MYSQLEE](images/monitor-instance-connected.png "monitor instance connected")
+
 14. Browse the interface and watch events
     ![MYSQLEE](images/monitor-watch-events.png "monitor watch events")
-15. 15. Browse the interface select from left menu “Metrics\Timeseries Graphs”. 
+
+15. Browse the interface select from left menu “Metrics\Timeseries Graphs”. 
     Then select your mysql instance and watch some graphs.
     ![MYSQLEE](images/monitor-watch-graphs.png "monitor watch graphs")
+
 16. Are you able to see your mysql1 in the list of hosts? Why not?
 
 
@@ -119,6 +139,7 @@ In this lab, you will:
     ```
 
     Write down the App-srv PRIVATE ip (client_ip)
+
 2. <span style="color:red">On mysql1:</span> Install the MEM agent and configure it
     Here a summary of the questions (from command installation in linux). Note Linux requires a manual first start
     ```
@@ -131,12 +152,15 @@ In this lab, you will:
     ![MYSQLEE](images/monitor-agent-installer-questions-part1.png "monitor agent installer questions part1")
     ![MYSQLEE](images/monitor-agent-installer-questions-part2.png "monitor agent installer questions part2")
     ![MYSQLEE](images/monitor-agent-installer-questions-part3.png "monitor agent installer questions part3")
+
 3. Start the agent
     ```
     <span style="color:green">shell-mysql1></span><copy>sudo /etc/init.d/mysql-monitor-agent start</copy>
     ```
+
 4. Return to your web browser and check the agent connection from left menu “Configuration\Agents”
     ![MYSQLEE](images/monitor-agents.png "monitor agents")
+
 5. Use now the new agent to monitor your mysql-advanced connection
     * left menu Configuration\MySQL Instances
     * check the box of mysql1:3307
@@ -151,7 +175,16 @@ In this lab, you will:
         ```
     ![MYSQLEE](images/monitor-new-agent.png "monitor new agent")
 
+    > **Note:**
+        Due to a bug, before confirm execute these additional steps
+
+        1. In **"Connect Using"** box select "Socket"
+
+        2. In **"Connect Using"** box restore the previous value "TCP/IP"
+
+
 6. Click “Edit Instance” button
+
 7. Now do you see the host mysql1 as target?
 
 

@@ -64,6 +64,14 @@ Steps to configure putty connection to OCI compute instances.
     Then retry the ssh connection.
 
 
+## Trouble 2: MySQL Enterprise Monitor connection settings missing "Host address and port fields must not be empty. (U0348)"
+
+There is a bug in MySQL Enterprise Monitor interface during the configuration of new instances.  
+In you receive the error "Host address and port fields must not be empty. (U0348)", follow these steps to add the instance
+case you are using powershell and you receive an error like
+
+1. 
+
 ## Acknowledgements
 * **Author** - Marco Carlessi, Principal Sales Consultant
 * **Contributors** -  Perside Foster, MySQL Solution Engineering, Selena Sánchez, MySQL Solutions Engineer

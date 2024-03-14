@@ -21,19 +21,29 @@ In this lab, you will:
     <span style="color:green">shell-app-srv$</span><copy>ssh -i $HOME/sshkeys/id_rsa_mysql1 opc@mysql1</copy>
     ```
     
-Please note that now you have 2 instances on the same server: one on  3306 (community) and one on 3307 (commercial).
+  Please note that now you have 2 instances on the same server: one on  3306 (community) and one on 3307 (commercial).
   MySQL (as default) interpret localhost as socket and not the 127.0.0.1 TCP address.This may end with strange behaviors and errors.
 
 
   Here we practice connecting in various way and check what is working and what is not (note: port 3310 is intentionally wrong).
 
-2. Use the command in table below to test different connection strings and check the result. If the result is not clear to you, please ask an explanation to your instructor. Please note that “-p” lowercase refers to password, “-P” uppercase refer to the TCP port.
-Don’t be confused by the client version and check these lines, to understand “why” (not all are always available...)
-* Current user:
-* Connection:
-* UNIX socket:
-* TCP port:
-* Server version:
+  2. Use the command in table below to test different connection strings and check the result. If the result is not clear to you, please ask an explanation to your instructor. Please note that “-p” lowercase refers to password, “-P” uppercase refer to the TCP port.
+  Don’t be confused by the client version and check these lines, to understand “why” (not all are always available...)
+  * Current user:
+  * Connection:
+  * UNIX socket:
+  * TCP port:
+  * Server version:
+
+  | Command | Port 3306 or 3307? | SSL is used? | Socket or TCP connection? |
+  | --- + --- + --- + --- |
+  | mysql -u root -p <br> mysql> status; |   |   |   |
+  | mysql -u root -p -P 3306 <br> mysql> status; |   |   |   |
+  | mysql -u root -p -P 3307 <br> mysql> status; |   |   |   |
+  | mysql -u root -p -h localhost -P 3307 <br> mysql> status; |   |   |   |
+  | mysql -u root -p -h 127.0.0.1 -P 3307 <br> mysql> status; |   |   |   |
+  | mysql -u root -p -h mysql1 -P 3307 <br> mysql> status; |   |   |   |
+
 
 ![MYSQLEE](./images/test-connections-table.png "test connections table")
 

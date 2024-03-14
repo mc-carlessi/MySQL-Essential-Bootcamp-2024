@@ -24,10 +24,12 @@ In this lab, you will be guided trough the following tasks:
     ```
     <span style="color:green">shell-app-srv$</span><copy> ssh -i $HOME/sshkeys/id_rsa_mysql1 opc@mysql1 </copy>
     ```
+
 2. On Oracle Linux8/RHEL8/Centos 8 is required to install ncurses-compat-libs to use the tar package (not for the rpms)
     ```
     <span style="color:green">shell-mysql1></span><copy> sudo yum install -y ncurses-compat-libs </copy>
     ```
+
 3. Usually, to run mysql is used the user “mysql”, but because he’s already available we show here how create a new one.
 Create a new user/group for your MySQL service (mysqluser/mysqlgrp) and a add ‘mysqlgrp’ group to opc to help labs execution
     ```
@@ -39,27 +41,31 @@ Create a new user/group for your MySQL service (mysqluser/mysqlgrp) and a add �
     ```
     <span style="color:green">shell-mysql1></span><copy> sudo usermod -a -G mysqlgrp opc </copy>
     ```
+
 4. Create new directory structure:
     ```
-    <span style="color:green">shell-mysql1></span><copy> sudo mkdir /mysql/ /mysql/etc /mysql/data </copy>
+    <span style="color:green">shell-mysql1></span><copy> sudo mkdir /mysql/ /mysql/etc /mysql/data /mysql/log /mysql/temp /mysql/binlog</copy>
     ```
-    ```
-    <span style="color:green">shell-mysql1></span><copy>sudo mkdir /mysql/log /mysql/temp /mysql/binlog </copy>
-    ```
-5. To simplify the lab, add the mysql bin folder to the bash profile and customize the client prompt. Please insert these lines at the end of the file /home/opc/.bashrc
-    ```
-    <copy>export PATH=$PATH:/mysql/mysql-latest/bin</copy>
-    ```
-    ```
-    <copy>export MYSQL_PS1="\\u on \\h>\\_" </copy>
-    ```
-  You can edit the file with the editor that you prefer, here some examples: 
-    ```
-    <span style="color:green">shell-mysql1></span><copy>nano /home/opc/.bashrc </copy>
-    ```
-    ```
-    <span style="color:green">shell-mysql1></span><copy>vi /home/opc/.bashrc </copy>
-    ```
+
+5. To simplify the lab, add the mysql bin folder to the bash profile and customize the client prompt.
+
+    1.  Please insert these lines at the end of the file /home/opc/.bashrc
+        You can edit the file with the editor that you prefer, here some examples: 
+        ```
+        <span style="color:green">shell-mysql1></span><copy>nano /home/opc/.bashrc </copy>
+        ```
+        ```
+        <span style="color:green">shell-mysql1></span><copy>vi /home/opc/.bashrc </copy>
+        ```
+
+    2. Add these lines at the end, then save and exit
+        ```
+        <copy>export PATH=$PATH:/mysql/mysql-latest/bin</copy>
+        ```
+        ```
+        <copy>export MYSQL_PS1="\\u on \\h>\\_" </copy>
+        ```
+
 6. <span style="color:red">Close the ssh session and reopen it to activate the new privilege and settings for opc user</span>
 
 7. Extract the tarball in your /mysql folder
@@ -69,20 +75,24 @@ Create a new user/group for your MySQL service (mysqluser/mysqlgrp) and a add �
     ```
     <span style="color:green">shell-mysql1></span><copy>sudo tar xvf /workshop/linux/mysql-commercial-8.0.*-linux-glibc2.12-x86_64.tar.xz</copy>
     ```
+
 8. Create a symbolic link to mysql binary installation
     ```
     <span style="color:green">shell-mysql1></span><copy>sudo ln -s mysql-commercial-8.0.*-linux-glibc2.12-x86_64 mysql-latest </copy>
     ```
+
 9. Create a new configuration file <span style="color:red"> my.cnf </span> inside /mysql/etc
 To help you we created one with some variables, please copy it
     ```
     <span style="color:green">shell-mysql1></span><copy>sudo cp /workshop/support/my.cnf.mysql1 /mysql/etc/my.cnf </copy>
     ```
+
 10. Check the content of the configuration file to have a look inside.
-Please note that, because the port 3306 is already in use by the community server previously installed , we use now port 3307.
+    Please note that, because the port 3306 is already in use by the community server previously installed , we use now port 3307.
     ```
     <span style="color:green">shell-mysql1></span><copy> cat /mysql/etc/my.cnf </copy>
     ```
+
 11. For security reasons change ownership and permissions
     ```
     <span style="color:green">shell-mysql1></span><copy>sudo chown -R mysqluser:mysqlgrp /mysql </copy>
@@ -94,14 +104,17 @@ Please note that, because the port 3306 is already in use by the community serve
     ```
     <span style="color:green">shell-mysql1></span><copy>sudo chmod -R 770 /mysql/etc </copy>
     ```
+
 12. Save the changes, log out and log in again from the ssh for the changes to take effect on the user profile.initialize your database
     ```
     <span style="color:green">shell-mysql1></span><copy>sudo /mysql/mysql-latest/bin/mysqld --defaults-file=/mysql/etc/my.cnf --initialize --user=mysqluser </copy>
     ```
+
 13. Start your new mysql instance
     ```
     <span style="color:green">shell-mysql1></span><copy>sudo /mysql/mysql-latest/bin/mysqld --defaults-file=/mysql/etc/my.cnf --user=mysqluser & </copy>
     ```
+
 14. Verify that process is running
     ```
     <span style="color:green">shell-mysql1></span><copy>ps -ef | grep mysqld </copy>
@@ -109,10 +122,12 @@ Please note that, because the port 3306 is already in use by the community serve
     ```
     <span style="color:green">shell-mysql1></span><copy>netstat -an | grep 3307 </copy>
     ```
+
 15. Another way is searching the message “ready for connections” in error log as one of the last
     ```
     <span style="color:green">shell-mysql1></span><copy>grep -i ready /mysql/log/err_log.log </copy>
     ```
+
 16. Retrieve root password for first login
     ```
     <span style="color:green">shell-mysql1></span><copy>grep -i 'temporary password' /mysql/log/err_log.log</copy>
@@ -140,7 +155,7 @@ Please note that, because the port 3306 is already in use by the community serve
     ```
 
 20. Configure automatic startup and shutdown with system.
-Add a systemd service unit configuration file with details about the MySQL service. The file is named mysqld.service and is placed in /usr/lib/systemd/system. We created one for you (See addendum for the content)
+    Add a systemd service unit configuration file with details about the MySQL service. The file is named mysqld.service and is placed in /usr/lib/systemd/system. We created one for you (See addendum for the content)
     ```
     <span style="color:green">shell-mysql1></span><copy>sudo cp /workshop/support/mysqld-advanced.service /usr/lib/systemd/system/</copy>
     ```
@@ -180,12 +195,15 @@ Add a systemd service unit configuration file with details about the MySQL servi
     ```
     <span style="color:blue">mysql></span><copy>GRANT ALL PRIVILEGES ON *.* TO 'admin'@'%' WITH GRANT OPTION;</copy>
     ```
-23. In the configuration file was specified to load the commercial Thread Pool Plugin, check if it’s loaded and active. We use here the same command with different output (“;” vs “\G” as line termination)
+23. In the configuration file was specified to load the commercial Thread Pool Plugin, now let's check if it’s loaded and active. We can use different commands, please note that the last two are the same query with a different line terminator (“;” vs “\G” show output in a different format)
     ```
-    <span style="color:blue">mysql></span><copy>select * from information_schema.plugins where plugin_name like 'thread%';</copy>
+    <span style="color:blue">mysql></span><copy>SHOW PLUGINS;</copy>
     ```
     ```
-    <span style="color:blue">mysql></span><copy>select * from information_schema.plugins where plugin_name like 'thread%'\G</copy>
+    <span style="color:blue">mysql></span><copy>SELECT * FROM information_schema.plugins WHERE plugin_name LIKE 'thread%';</copy>
+    ```
+    ```
+    <span style="color:blue">mysql></span><copy>SELECT * FROM information_schema.plugins WHERE plugin_name LIKE 'thread%'\G</copy>
     ```
 
 
