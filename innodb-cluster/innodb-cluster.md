@@ -3,7 +3,7 @@
 ## Introduction
 An InnoDB Cluster consists of at least three MySQL Server instances, and it provides high-availability and scaling features.
 
-In this lab you will create 3 nodes MySQL InnoDB Cluster as Single Primary and have a trial on the MySQL Shell to configure and operate. And you will be using MySQL Router to test for Server routing and test for Failover.
+In this lab you will create 3 instances MySQL InnoDB Cluster as Single Primary and have a trial on the MySQL Shell to configure and operate. And you will be using MySQL Router to test for Server routing and test for Failover.
 
 
 Estimated Lab Time: 40 minutes
@@ -23,7 +23,7 @@ In this lab, you will:
  * We use here different ways to configure the secondaries
  * We don't need a direct access to the instance servers 
 
-## Task 1: Prepare to create Cluster
+## Task 1: Check data model and prepare instances
 1. From **app-srv**, connect the client to mysql1 and verify data model compatibility with Group replication requirements. If needed, fix the errors
     ```
     <span style="color:green">shell-app-srv$</span> <copy>mysql -uadmin -p -hmysql1 -P3307</copy>
@@ -108,10 +108,13 @@ In this lab, you will:
 
     2. Verify that the instance is empty
         ```
-        <span style="color:blue">mysql3></span> <copy>exit</copy>
+        <span style="color:blue">mysql3></span> <copy>SHOW DATABASES;</copy>
         ```
 
 8. Now exit from mysql2 and mysql3 shells, we don't need them anymore. 
+    ```
+    <span style="color:blue">mysql3></span> <copy>exit</copy>
+    ```
 
 
 ## Task 2: Create Cluster 
@@ -126,8 +129,7 @@ In this lab, you will:
     <span style="color:blue">My</span><span style="color: orange">SQL </span><span style="background-color:yellow">JS</span>> <copy>dba.checkInstanceConfiguration('admin@mysql1:3307')</copy>
     ```
 
-    **OUTPUT EXAMPLE WITH ERRORS**
-    <span style="color:white;background-color:#black">
+    **OUTPUT EXAMPLE: CONFIGURATION ERRORS**
     ```
     ...
     NOTE: Some configuration options need to be fixed:
@@ -151,15 +153,13 @@ In this lab, you will:
         "status": "error"
     }
     ```
-    </span>
 
 3. We use now MySQL Shell to fix these errors. Confirm when MySQL Shell ask to cahnge or reboot 
     ```
     <span style="color:blue">My</span><span style="color: orange">SQL </span><span style="background-color:yellow">JS</span>> <copy>dba.configureInstance('admin@mysql1:3307')</copy>
     ```
 
-    **OUTPUT EXAMPLE TO FIX ERRORS**
-    <span style="color:white;background-color:#000000">
+    **OUTPUT EXAMPLE: FIX ERRORS**
     ```
     Configuring local MySQL instance listening at port 3307 for use in an InnoDB cluster...
 
@@ -181,14 +181,13 @@ In this lab, you will:
     WARNING: '@@binlog_transaction_dependency_tracking' is deprecated and will be removed in a future release. (Code 1287).
     The instance 'mysql1:3307' was configured to be used in an InnoDB cluster.
     ```
-    </span>
 
 4. Just to be sure, re-check the instance configuration and verify that you receive an "ok" message
     ```
     <span style="color:blue">My</span><span style="color: orange">SQL </span><span style="background-color:yellow">JS</span> <copy>dba.checkInstanceConfiguration('admin@mysql1:3307')</copy>
     ```
 
-   **OUTPUT EXAMPLE TO FIX ERRORS**
+   **OUTPUT EXAMPLE: NO CONFIGURATION ERRORS**
     ```
     ...
     The instance 'mysql1:3307' is valid to be used in an InnoDB cluster.
@@ -208,22 +207,69 @@ In this lab, you will:
     <span style="color:blue">My</span><span style="color: orange">SQL </span><span style="background-color:yellow">JS</span>> <copy>var cluster = dba.createCluster('testCluster')</copy>
      ```
 
-    ![MYSQLEE](images/cluster-create.png "cluster create")
+   **OUTPUT EXAMPLE: CLUSTER CREATED**
+     ```
+    A new InnoDB Cluster will be created on instance 'mysql1:3307'.
 
-5. Verify cluster status (why "Cluster is NOT tolerant to any failures" ?)
+    Validating instance configuration at mysql1:3307...
+
+    This instance reports its own address as mysql1:3307
+
+    Instance configuration is suitable.
+    NOTE: Group Replication will communicate with other members using 'mysql1:3307'. Use the localAddress option to override.
+
+    * Checking connectivity and SSL configuration...
+
+    Creating InnoDB Cluster 'testCluster' on 'mysql1:3307'...
+
+    Adding Seed Instance...
+    Cluster successfully created. Use Cluster.addInstance() to add MySQL instances.
+    At least 3 instances are needed for the cluster to be able to withstand up to
+    one server failure.
+     ```
+
+
+6. Verify cluster status (why "Cluster is NOT tolerant to any failures" ?)
     ```
     <span style="color:blue">My</span><span style="color: orange">SQL </span><span style="background-color:yellow">JS</span>> <copy>cluster.status()</copy>
     ```
 
-    ![MYSQLEE](images/cluster-status.png "cluster status")
+   **OUTPUT EXAMPLE: CLUSTER STATUS WITH ONE INSTANCE**
+     ```
+    {
+        "clusterName": "testCluster",
+        "defaultReplicaSet": {
+            "name": "default",
+            "primary": "mysql1:3307",
+            "ssl": "REQUIRED",
+            "status": "OK_NO_TOLERANCE",
+            "statusText": "Cluster is NOT tolerant to any failures.",
+            "topology": {
+                "mysql1:3307": {
+                    "address": "mysql1:3307",
+                    "memberRole": "PRIMARY",
+                    "mode": "R/W",
+                    "readReplicas": {},
+                    "replicationLag": "applier_queue_applied",
+                    "role": "HA",
+                    "status": "ONLINE",
+                    "version": "8.0.36"
+                }
+            },
+            "topologyMode": "Single-Primary"
+        },
+        "groupInformationSourceMember": "mysql1:3307"
+    }
+     ```
 
-## Task 3: Add a second and third server to the cluster
-1. Check the instance configuration, and probably it produces the same error as the first ‘primary:3307’
+
+## Task 3: Add a second and third instance to the cluster
+1. Check the instance configuration on mysql3
     ```
     <span style="color:blue">My</span><span style="color: orange">SQL </span><span style="background-color:yellow">JS</span>> <copy>dba.checkInstanceConfiguration('admin@mysql2:3307')</copy>
     ```
 
-2. Use MySQL Shell to fix issues
+2. Use MySQL Shell to fix issues (confirm required changes)
     ```
     <span style="color:blue">My</span><span style="color: orange">SQL </span><span style="background-color:yellow">JS</span>> <copy>dba.configureInstance('admin@mysql2:3307')</copy>
     ```
@@ -233,43 +279,153 @@ In this lab, you will:
     <span style="color:blue">My</span><span style="color: orange">SQL </span><span style="background-color:yellow">JS</span>> <copy>cluster.addInstance('admin@mysql2:3307')</copy>
     ```
 
-    ![MYSQLEE](images/cluster-add-instance.png "cluster add instance")
+   **OUTPUT EXAMPLE: ADD SECOND INSTANCE (EXTRACT)**
+    ```
+    The safest and most convenient way to provision a new instance is through automatic clone provisioning, which will completely overwrite the state of 'mysql2:3307' with a physical snapshot from an existing cluster member. To use this method by default, set the 'recoveryMethod' option to 'clone'.
+
+    The incremental state recovery may be safely used if you are sure all updates ever executed in the cluster were done with GTIDs enabled, there are no purged transactions and the new instance contains the same GTID set as the cluster or a subset of it. To use this method by default, set the 'recoveryMethod' option to 'incremental'.
+
+    Incremental state recovery was selected because it seems to be safely usable.
+
+    ...
+
+    The instance 'mysql2:3307' was successfully added to the cluster.
+    ```
+ 
 
 4. Verify cluster status
     ```
     <span style="color:blue">My</span><span style="color: orange">SQL </span><span style="background-color:yellow">JS</span>> <copy>cluster.status()</copy>
     ```
 
+   **OUTPUT EXAMPLE: CLUSTER STATUS WITH 2 INSTANCES**
+    ```
+    {
+        "clusterName": "testCluster",
+        "defaultReplicaSet": {
+            "name": "default",
+            "primary": "mysql1:3307",
+            "ssl": "REQUIRED",
+            "status": "OK_NO_TOLERANCE",
+            "statusText": "Cluster is NOT tolerant to any failures.",
+            "topology": {
+                "mysql1:3307": {
+                    "address": "mysql1:3307",
+                    "memberRole": "PRIMARY",
+                    "mode": "R/W",
+                    "readReplicas": {},
+                    "replicationLag": "applier_queue_applied",
+                    "role": "HA",
+                    "status": "ONLINE",
+                    "version": "8.0.36"
+                },
+                "mysql2:3307": {
+                    "address": "mysql2:3307",
+                    "memberRole": "SECONDARY",
+                    "mode": "R/O",
+                    "readReplicas": {},
+                    "replicationLag": "applier_queue_applied",
+                    "role": "HA",
+                    "status": "ONLINE",
+                    "version": "8.0.36"
+                }
+            },
+            "topologyMode": "Single-Primary"
+        },
+        "groupInformationSourceMember": "mysql1:3307"
+    }
+    ```
 
-    ![MYSQLEE](images/cluster-status-with-second-instance.png "cluster status with second instance")
-
-5. Now we add the third node to cluster, check the instance configuration
+5. Now we add the third instance to cluster, check the instance configuration
     ```
     <span style="color:blue">My</span><span style="color: orange">SQL </span><span style="background-color:yellow">JS</span>> <copy>dba.checkInstanceConfiguration('admin@mysql3:3307')</copy>
     ```
-6. If there are issues (we missed something...), read the messages and fix with
+
+6. If there are issues fix them
     ```
     <span style="color:blue">My</span><span style="color: orange">SQL </span><span style="background-color:yellow">JS</span>> <copy>dba.configureInstance('admin@mysql3:3307')</copy>
     ```
-7. Add the last instance to the cluster
-    ```
-    <span style="color:blue">My</span><span style="color: orange">SQL </span><span style="background-color:yellow">JS</span>> <copy>cluster.addInstance('admin@mysql3:3307')</copy>
-    ```
-8. Because the instance is empty, we receive an alert. We use now the clone plugin
-    ![MYSQLEE](images/cluster-add-instance-alert.png "cluster add instance alert")
 
-9. Type ‘C’ and confirm. This start the clone process
-    ![MYSQLEE](images/cluster-clone-process.png "cluster clone process")
+7. Add now the instance on mysql3 to the cluster
+    * Use the same command as before to add the instance. But now we received an alert about incorrect GTID set (please remember that the this instance is empty).
+        ```
+        <span style="color:blue">My</span><span style="color: orange">SQL </span><span style="background-color:yellow">JS</span>> <copy>cluster.addInstance('admin@mysql3:3307')</copy>
+        ```
 
-10. Verify cluster status, now with all three servers
+    **OUTPUT EXAMPLE: ADD 3 INSTANCE GTID WARNING (EXTRACT)**
+        ```
+        WARNING: A GTID set check of the MySQL instance at 'mysql3:3307' determined that it contains transactions that do not originate from the cluster, which must be discarded before it can join the cluster.
+
+        mysql3:3307 has the following errant GTIDs that do not exist in the cluster:
+        ...
+        ```
+
+    * To complete this step choose **[C]lone** as recovery mode to use the MySQL clone plugin
+
+   **OUTPUT EXAMPLE: ADD 3 INSTANCE WITH CLONE (EXTRACT)**
+        ```
+        Please select a recovery method [C]lone/[A]bort (default Abort): C
+        Validating instance configuration at mysql3:3307...
+
+        ...
+
+        The instance 'mysql3:3307' was successfully added to the cluster.
+        ```
+
+8. Verify cluster status, now with all three servers. Please check that **"status": "OK"** and **"primary": "mysql1:3307"**
     ```
     <span style="color:blue">My</span><span style="color: orange">SQL </span><span style="background-color:yellow">JS</span>> <copy>cluster.status()</copy>
     ```
 
-    ![MYSQLEE](images/cluster-status-with-three-instances.png "cluster status with three instances")
+   **OUTPUT EXAMPLE: CLUSTER STATUS WITH 2 INSTANCES**
+    ```
+    {
+        "clusterName": "testCluster",
+        "defaultReplicaSet": {
+            "name": "default",
+            "primary": "mysql1:3307",
+            "ssl": "REQUIRED",
+            "status": "OK",
+            "statusText": "Cluster is ONLINE and can tolerate up to ONE failure.",
+            "topology": {
+                "mysql1:3307": {
+                    "address": "mysql1:3307",
+                    "memberRole": "PRIMARY",
+                    "mode": "R/W",
+                    "readReplicas": {},
+                    "replicationLag": "applier_queue_applied",
+                    "role": "HA",
+                    "status": "ONLINE",
+                    "version": "8.0.36"
+                },
+                "mysql2:3307": {
+                    "address": "mysql2:3307",
+                    "memberRole": "SECONDARY",
+                    "mode": "R/O",
+                    "readReplicas": {},
+                    "replicationLag": "applier_queue_applied",
+                    "role": "HA",
+                    "status": "ONLINE",
+                    "version": "8.0.36"
+                },
+                "mysql3:3307": {
+                    "address": "mysql3:3307",
+                    "memberRole": "SECONDARY",
+                    "mode": "R/O",
+                    "readReplicas": {},
+                    "replicationLag": "applier_queue_applied",
+                    "role": "HA",
+                    "status": "ONLINE",
+                    "version": "8.0.36"
+                }
+            },
+            "topologyMode": "Single-Primary"
+        },
+        "groupInformationSourceMember": "mysql1:3307"
+    }
+    ```
 
-11. Verify the new status. How do you recognize the Primary server?
-12. Exit from MySQL Shell
+12. Now cluster is up and running, and we can exit from MySQL Shell
     ```
     <span style="color:blue">My</span><span style="color: orange">SQL </span><span style="background-color:yellow">JS</span>> <copy>\q</copy>
     ```
@@ -277,7 +433,7 @@ In this lab, you will:
 
 ## Task 4: Deploy MySQL Router
 > **Note:** 
-* By default MySQL router uses mysql_native_password (deprecated) for its user, we force the usage of the new chaching_sha2 with the option "--force-password-validation" at bootstrap time.
+* By default MySQL router uses mysql\_native\_password (deprecated) for its user, we force the usage of the new chaching_sha2 with the option "--force-password-validation" at bootstrap time.
 
 1.  Install MySQL Router via rpm package
     ```
@@ -290,8 +446,8 @@ In this lab, you will:
     ```
 
     Have a look on the output, note the following:
-    * Read/Write Connections port: 
-    * Read/Only Connections:
+    * Read/Write Connections port: **localhost:6446**
+    * Read/Only Connections: **localhost:6447**
 
 3. Start MySQL Router
     ```
@@ -346,7 +502,7 @@ In this lab, you will:
     <span style="color:blue">mysql-ro></span> <copy>INSERT INTO newtable VALUES(3);</copy>
     ```
     ```
-    <span style="color:blue">mysql-ro></span> <copy>show variables like '%read_only';</copy>
+    <span style="color:blue">mysql-ro></span> <copy>show variables where Variable_name in ('read_only','super_read_only');</copy>
     ```
     ```
     <span style="color:blue">mysql-ro></span> <copy>exit</copy>
@@ -369,7 +525,7 @@ In this lab, you will:
         ```
         <span style="color:green">shell-mysql1></span> <copy>sudo kill -9 <process id from previous step></copy>
         ```
-    * <span style="color:red">Return to mysql connection previously opened</span> and verify if it works. It may requires 15/2 seconds to be online.
+    * <span style="color:red">Return to mysql connection previously opened</span> and verify if it works. It may requires 15/20 seconds to be online.
         ```
         <span style="color:blue">mysql-rw></span> <copy>SELECT @@hostname, @@port;</copy>
         ```
