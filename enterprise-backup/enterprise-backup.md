@@ -33,7 +33,7 @@ In this lab, you will:
     To simplify user creations we have a script with minimal grants for this user (see the manual for additional privileges required for specific features like TTS, SBT integration, encrypted). You can also have a look on the privileges opening the file /workshop/support/mysqlbackup_user_grants.sql
 
     ```
-    <span style="color:green">shell></span> <copy>mysql -uadmin -p -hmysql1 -P3307</copy>
+    <span style="color:green">shell></span> <copy>mysqlsh -uadmin -p -h mysql1 -P 3307 --sql</copy>
     ```
     ```
     <span style="color:blue">mysql></span> <copy>CREATE USER 'mysqlbackup'@'%' IDENTIFIED BY 'Welcome1!';</copy>
@@ -42,7 +42,7 @@ In this lab, you will:
     <span style="color:blue">mysql></span> <copy>source /workshop/support/mysqlbackup_user_grants.sql;</copy>
     ```
     ```
-    <span style="color:blue">mysql></span> <copy>exit</copy>
+    <span style="color:blue">mysql></span> <copy>\q</copy>
     ```
 
 4. Create a full backup 
@@ -139,7 +139,7 @@ In this lab, you will:
     <span style="color:green">shell></span> <copy>sudo systemctl start mysqld-advanced</copy>
     ```
     ```
-    <span style="color:green">shell></span> <copy>mysql -uadmin -p -hmysql1 -P3307</copy>
+    <span style="color:green">shell></span> <copy>mysqlsh -uadmin -p -h mysql1 -P 3307 --sql</copy>
     ```
     ```
     <span style="color:blue">mysql></span> <copy>SHOW DATABASES;</copy>

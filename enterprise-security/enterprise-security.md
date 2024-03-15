@@ -32,12 +32,12 @@ In this lab, you will work with:
 
 2. Install MySQL Enterprise Firewall on mysql-advanced using CLI
     ```
-    <span style="color:green">shell-mysql1></span> <copy>mysql -uadmin -p -P3307 -h mysql1 < /mysql/mysql-latest/share/linux_install_firewall.sql</copy>
+    <span style="color:green">shell-mysql1></span> <copy>mysqlsh -uadmin -p -P3307 -h mysql1 --sql < /mysql/mysql-latest/share/linux_install_firewall.sql</copy>
     ```
 
 3. Connect to the instance with administrative account <span style="color:red">first SSH connection - administrative</span>
     ```
-    <span style="color:green">shell-mysql1></span> <copy>mysql -uadmin -p -P3307 -hmysql1</copy>
+    <span style="color:green">shell-mysql1></span> <copy>mysqlsh -uadmin -p -h mysql1 -P 3307 --sql</copy>
     ```
 
 4. Check if firewall is enabled
@@ -68,7 +68,7 @@ In this lab, you will work with:
 
 8. Open a <span style="color:red">second SSH</span> connection and use it to connect as “fwtest” from app-srv
     ```
-    <span style="color:green">shell-mysql1></span> <copy>mysql -ufwtest -p -P3307 -hmysql1</copy>
+    <span style="color:green">shell-mysql1></span> <copy>mysqlsh -ufwtest -p -P3307 -hmysql1 --sql</copy>
     ```
     ```
     <span style="color:blue">mysql></span> <copy>USE world;</copy>
@@ -127,7 +127,7 @@ In this lab, you will work with:
 
 15. <span style="color:red">Administrative connection:</span>Now exit from administrative session on mysql1 and search the error in the error log.
     ```
-    <span style="color:blue">mysql></span> <copy>exit</copy>
+    <span style="color:blue">mysql></span> <copy>\q</copy>
     ```
     ```
     <span style="color:green">shell-mysql1></span> <copy>grep "MY-011191" /mysql/log/err_log.log</copy>
@@ -135,7 +135,7 @@ In this lab, you will work with:
 
 16. <span style="color:red">Administrative connection:</span> Error log can also be interrogated also from the client.
     ```
-    <span style="color:green">shell-mysql1></span> <copy>mysql -uadmin -p -P3307 -hmysql1</copy>
+    <span style="color:green">shell-mysql1></span> <copy>mysqlsh -uadmin -p -h mysql1 -P 3307 --sql</copy>
     ```
     ```
     <span style="color:blue">mysql></span> <copy>SELECT * FROM performance_schema.error_log WHERE ERROR_CODE='MY-011191';</copy>
@@ -146,7 +146,7 @@ In this lab, you will work with:
     <span style="color:blue">mysql></span> <copy>CALL mysql.sp_set_firewall_mode('fwtest@%', 'OFF');</copy>
     ```
     ```
-    <span style="color:blue">mysql></span> <copy>exit</copy>
+    <span style="color:blue">mysql></span> <copy>\q</copy>
     ```
  
 ## Task 2: MySQL Enterprise Audit
@@ -155,12 +155,12 @@ In this lab, you will work with:
 
 2. Enable Audit using the pre-configured script in the share directory of your MySQL installation, and verify that the script return the message "OK" 
     ```
-    <span style="color:green">shell-mysql1></span> <copy>mysql -uadmin -p -P3307 -h mysql1 mysql < /mysql/mysql-latest/share/audit_log_filter_linux_install.sql</copy>
+    <span style="color:green">shell-mysql1></span> <copy>mysqlsh -uadmin -p -P3307 -h mysql1 -D mysql --sql < /mysql/mysql-latest/share/audit_log_filter_linux_install.sql</copy>
     ```
 
 3. Connect to the instance with administrative account
     ```
-    <span style="color:green">shell-mysql1></span> <copy>mysql -uadmin -p -P3307 -hmysql1</copy>
+    <span style="color:green">shell-mysql1></span> <copy>mysqlsh -uadmin -p -h mysql1 -P 3307 --sql</copy>
     ```
 
 4. Verify that the Audit plugin is loaded and active. If it's not active, repeat previous step or ask help to the instructor
@@ -183,10 +183,10 @@ In this lab, you will work with:
 
 7. Exit from admin connection and login with the user “appuser2” to submit some commands
     ```
-    <span style="color:blue">mysql></span> <copy>exit</copy>
+    <span style="color:blue">mysql></span> <copy>\q</copy>
     ```
     ```
-    <span style="color:green">shell-mysql1></span> <copy>mysql -u appuser2 -p -h mysql1 -P 3307</copy>
+    <span style="color:green">shell-mysql1></span> <copy>mysqlsh -u appuser2 -p -h mysql1 -P 3307 --sql</copy>
     ```
     ```
     <span style="color:blue">mysql></span> <copy>USE world;</copy>
@@ -198,7 +198,7 @@ In this lab, you will work with:
     <span style="color:blue">mysql></span> <copy>SELECT Code, Name, Region FROM country WHERE population > 200000;</copy>
     ```
     ```
-    <span style="color:blue">mysql></span> <copy>exit</copy>
+    <span style="color:blue">mysql></span> <copy>\q</copy>
     ```
 
 4. Open the audit.log file the datadir and verify the content
@@ -214,7 +214,7 @@ In this lab, you will work with:
 1.  Install the Data Masking components
     * Login to mysql instance with administrative
         ```
-        <span style="color:green">shell></span> <copy>mysql -uadmin -p -h mysql1 -P 3307</copy>
+        <span style="color:green">shell></span> <copy>mysqlsh -uadmin -p -h mysql1 -P 3307 --sql</copy>
         ```
     * Create the masking_dictionaries table
         ```

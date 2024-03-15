@@ -42,7 +42,7 @@ In this lab, you will:
 
 5. <span style="color:red">Close and reopen the SSH connection to mysql2 server</span> to let opc user have the new group.
     ```
-    <span style="color:green">shell-app-srv$</span> <copy>exit</copy>
+    <span style="color:green">shell-app-srv$</span> <copy>\q</copy>
     ```
     ```
     <span style="color:green">shell-app-srv$</span> <copy>ssh -i $HOME/sshkeys/id_rsa_mysql2 opc@mysql2</copy>
@@ -95,7 +95,7 @@ In this lab, you will:
         <span style="color:green">shell-mysql2></span> <copy>sudo systemctl start mysqld-advanced</copy>
         ```
         ```
-        <span style="color:green">shell-mysql2></span> <copy>mysql -uadmin -p -hmysql2 -P3307</copy>
+        <span style="color:green">shell-mysql2></span> <copy>mysqlsh -uadmin -p -h mysql2 -P 3307 --sql</copy>
         ```
         ```
         <span style="color:blue">mysql-replica></span> <copy>SELECT @@hostname;</copy>
@@ -106,7 +106,7 @@ In this lab, you will:
 
 4. <span style="color:red">mysql1 (source):</span> Create the replication user
     ```
-    <span style="color:green">shell-mysql1></span> <copy>mysql -uadmin -p -hmysql1 -P3307</copy>
+    <span style="color:green">shell-mysql1></span> <copy>mysqlsh -uadmin -p -h mysql1 -P 3307 --sql</copy>
     ```
     ```
     <span style="color:blue">mysql-source></span> <copy>CREATE USER 'repl'@'%' IDENTIFIED BY 'Welcome1!' REQUIRE SSL;</copy>

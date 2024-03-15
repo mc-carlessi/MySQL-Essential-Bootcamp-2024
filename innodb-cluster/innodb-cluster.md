@@ -26,7 +26,7 @@ In this lab, you will:
 ## Task 1: Check data model and prepare instances
 1. From **app-srv**, connect the client to mysql1 and verify data model compatibility with Group replication requirements. If needed, fix the errors
     ```
-    <span style="color:green">shell-app-srv$</span> <copy>mysql -uadmin -p -hmysql1 -P3307</copy>
+    <span style="color:green">shell-app-srv$</span> <copy>mysqlsh -uadmin -p -h mysql1 -P 3307 --sql</copy>
     ```
 
 2. Search non InnoDB tables and if there are you must change them. <span style="color:red">For this lab just drop them</span>
@@ -72,13 +72,13 @@ In this lab, you will:
     <span style="color:blue">mysql-primary></span> <copy>show create table world.city_part\G</copy>
     ```
     ```
-    <span style="color:blue">mysql-primary></span> <copy>exit</copy>
+    <span style="color:blue">mysql-primary></span> <copy>\q</copy>
     ```
 
 5. We use mysql1 as primary, but we need a second instance. For this we can use mysql2. Just stop replication
     * Connect your client to mysql2 with administrative account
         ```
-        <span style="color:green">shell-app-srv$</span> <copy>mysql -uadmin -p -hmysql2 -P3307</copy>
+        <span style="color:green">shell-app-srv$</span> <copy>mysqlsh -uadmin -p -h mysql2 -P 3307 --sql</copy>
         ```
     * Stop and remove the replication settings
         ```
@@ -88,7 +88,7 @@ In this lab, you will:
         <span style="color:blue">mysql-secondary-1></span> <copy>reset replica all;</copy>
         ```
         ```
-        <span style="color:blue">mysql-secondary-1></span> <copy>exit</copy>
+        <span style="color:blue">mysql-secondary-1></span> <copy>\q</copy>
         ```
 
 6. Now we need a third instance. We install now a fresh one on mysql3 
@@ -101,9 +101,9 @@ In this lab, you will:
         <span style="color:green">shell-mysql3></span> <copy>/workshop/support/MySQL_InnoDB_Cluster___secondary_on_mysql3.sh</copy>
         ```
 7. The instance on mysql3 is new, so let's verify that everything is fine
-    1. Connect to the instance (We use “sudo” because PATH and ownerships requires assigned by previous script requires a logoff+logon)
+    1. Connect to the instance
         ```
-        <span style="color:green">shell-mysql3></span> <copy>sudo /mysql/mysql-latest/bin/mysql -uadmin -p -hmysql3 -P 3307</copy>
+        <span style="color:green">shell-mysql3></span> <copy>mysqlsh -uadmin -p -h mysql3 -P 3307 --sql</copy>
         ```
 
     2. Verify that the instance is empty
@@ -113,7 +113,7 @@ In this lab, you will:
 
 8. Now exit from mysql2 and mysql3 shells, we don't need them anymore. 
     ```
-    <span style="color:blue">mysql3></span> <copy>exit</copy>
+    <span style="color:blue">mysql3></span> <copy>\q</copy>
     ```
 
 
@@ -457,7 +457,7 @@ In this lab, you will:
 4. Test the connection with a mysql client connect to 6446 port (read/write). To which server are you currently connected? Can you change the content?
 
     ```
-    <span style="color:green">shell-app-srv$</span> <copy>mysql -uadmin -p -h127.0.0.1 -P6446</copy>
+    <span style="color:green">shell-app-srv$</span> <copy>mysqlsh -uadmin -p -h127.0.0.1 -P6446 --sql</copy>
     ```
     ```
     <span style="color:blue">mysql-rw></span> <copy>SELECT @@hostname, @@port;</copy>
@@ -481,13 +481,13 @@ In this lab, you will:
     <span style="color:blue">mysql-rw></span> <copy>SELECT * from newtable;</copy>
     ```
     ```
-    <span style="color:blue">mysql-rw></span> <copy>exit</copy>
+    <span style="color:blue">mysql-rw></span> <copy>\q</copy>
     ```
 
 5. The second port of MySQL Router is used for read only sessions. Close session and re open on port 6447 (read only port).
     To which server are you currently connected? Can you change the content?
     ```
-    <span style="color:green">shell-app-srv$</span> <copy>mysql -uadmin -p -h127.0.0.1 -P6447</copy>
+    <span style="color:green">shell-app-srv$</span> <copy>mysqlsh -uadmin -p -h127.0.0.1 -P6447 --sql</copy>
     ```
     ```
     <span style="color:blue">mysql-ro></span> <copy>SELECT @@hostname, @@port;</copy>
@@ -505,9 +505,10 @@ In this lab, you will:
     <span style="color:blue">mysql-ro></span> <copy>show variables where Variable_name in ('read_only','super_read_only');</copy>
     ```
     ```
-    <span style="color:blue">mysql-ro></span> <copy>exit</copy>
+    <span style="color:blue">mysql-ro></span> <copy>\q</copy>
     ```
-6. Reconnect to primary instance through the router. <span style="color:red">Please keep this session open!</span>
+6. Reconnect to primary instance through the router. <span style="color:red">Please keep this session open!</span>. 
+    We use here the mysql client to use its reconnect feature. 
     ```
     <span style="color:green">shell-app-srv$</span> <copy>mysql -uadmin -p -h127.0.0.1 -P6446</copy>
     ```

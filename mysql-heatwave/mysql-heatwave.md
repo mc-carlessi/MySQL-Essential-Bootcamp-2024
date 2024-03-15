@@ -102,7 +102,7 @@ In this lab, you will:
     ```
 2. Connect to your instance
     ```
-    <span style="color:green">shell-app-srv$</span><copy>mysql -uadmin -p -h <mds_ip_address></copy>
+    <span style="color:green">shell-app-srv$</span><copy>mysqlsh -uadmin -p -h <mds_ip_address> --sql</copy>
     ```
 3. Now we execute some commands to interact with our instance.
     * Show the database version, current_date, and user

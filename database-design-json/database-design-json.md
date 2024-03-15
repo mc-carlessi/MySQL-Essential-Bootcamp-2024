@@ -17,69 +17,79 @@ In this lab, you will:
 
 
 ## Task 1: Work with JSON
-1. Create a database for JSON tests
+1. Connect to your <span style="color:red">mysql-advanced</span> with admin user
     ```
-    <span style="color:blue">mysql></span><copy>CREATE DATABASE json_test;</copy>
+    <span style="color:green">shell></span> <copy>mysqlsh -uadmin -p -h mysql1 -P 3307 --sql</copy>
     ```
+
+2. Create a database for JSON tests
     ```
-    <span style="color:blue">mysql></span><copy>USE json_test;</copy>
-    ```
-2. Create a JSON table
-    ```
-    <span style="color:blue">mysql></span><copy>CREATE TABLE jtest (id bigint NOT NULL AUTO_INCREMENT, doc JSON, PRIMARY KEY (id));</copy>
+    <span style="color:blue">mysql></span> <copy>CREATE DATABASE json_test;</copy>
     ```
     ```
-    <span style="color:blue">mysql></span><copy>DESC jtest;</copy>
+    <span style="color:blue">mysql></span> <copy>USE json_test;</copy>
     ```
-3. Add data to this table 
+3. Create a JSON table
+    ```
+    <span style="color:blue">mysql></span> <copy>CREATE TABLE jtest (id bigint NOT NULL AUTO_INCREMENT, doc JSON, PRIMARY KEY (id));</copy>
+    ```
+    ```
+    <span style="color:blue">mysql></span> <copy>DESC jtest;</copy>
+    ```
+4. Add data to this table 
 
     > **Note:** The second insert adds 2 records in one step
 
     ```
-    <span style="color:blue">mysql></span><copy>INSERT INTO jtest(doc) VALUE('{"A": "hello", "b": "test", "c": {"hello": 1}}');</copy>
+    <span style="color:blue">mysql></span> <copy>INSERT INTO jtest(doc) VALUE('{"A": "hello", "b": "test", "c": {"hello": 1}}');</copy>
     ```
     ```
-    <span style="color:blue">mysql></span><copy>INSERT INTO jtest(doc) VALUE('{"b": "hello"}'),('{"c": "help"}');</copy>
+    <span style="color:blue">mysql></span> <copy>INSERT INTO jtest(doc) VALUE('{"b": "hello"}'),('{"c": "help"}');</copy>
     ```
     ```
-    <span style="color:blue">mysql></span><copy>SELECT * FROM jtest;</copy>
+    <span style="color:blue">mysql></span> <copy>SELECT * FROM jtest;</copy>
     ```
-4. Retrieve json documents with these commands 
+5. Retrieve json documents with these commands 
 
     > **Note** the shortcut “->” or “->>”
 
 
     ```
-    <span style="color:blue">mysql></span><copy>SELECT json_extract (doc, "$.b") FROM jtest;</copy>
+    <span style="color:blue">mysql></span> <copy>SELECT json_extract (doc, "$.b") FROM jtest;</copy>
     ```
     ```
-    <span style="color:blue">mysql></span><copy>SELECT doc->"$.b" FROM jtest;</copy>
+    <span style="color:blue">mysql></span> <copy>SELECT doc->"$.b" FROM jtest;</copy>
     ```
     ```
-    <span style="color:blue">mysql></span><copy>SELECT doc->>"$.b" from jtest;</copy>
+    <span style="color:blue">mysql></span> <copy>SELECT doc->>"$.b" from jtest;</copy>
     ```
-5.  Create an index on the virtual column
+
+6.  Create an index on the virtual column
     * You can search a record and check with “explain” that there is no usable index on our table
         ```
-        <span style="color:blue">mysql></span><copy>select * from jtest where doc->>"$.b"='test';</copy>
+        <span style="color:blue">mysql></span> <copy>select * from jtest where doc->>"$.b"='test';</copy>
         ```
         ```
-        <span style="color:blue">mysql></span><copy>EXPLAIN select * from jtest where doc->>"$.b"='test';</copy>
+        <span style="color:blue">mysql></span> <copy>EXPLAIN select * from jtest where doc->>"$.b"='test';</copy>
         ```
         ![MYSQLEE](images/explain-jtest-query.png "explain query")
     * We add now an index on column “b”
         ```
-        <span style="color:blue">mysql></span><copy>alter table jtest add column gencol CHAR(50) AS (doc->>"$.b");</copy>
+        <span style="color:blue">mysql></span> <copy>alter table jtest add column gencol CHAR(50) AS (doc->>"$.b");</copy>
         ```
         ```
-        <span style="color:blue">mysql></span><copy>CREATE INDEX myvirtindex ON jtest(gencol);</copy>
+        <span style="color:blue">mysql></span> <copy>CREATE INDEX myvirtindex ON jtest(gencol);</copy>
         ```
     * And now we repeat the explain and see that now we automatically use the index
         ```
-        <span style="color:blue">mysql></span><copy>EXPLAIN select * from jtest where doc->>"$.b"='test';</copy>
+        <span style="color:blue">mysql></span> <copy>EXPLAIN select * from jtest where doc->>"$.b"='test';</copy>
         ```
         ![MYSQLEE](images/explain-jtest-query-with-index.png "explain jtest query with index")
 
+7.  You can now exit from MySQL Shell
+        ```
+        <span style="color:blue">mysql></span> <copy>\q</copy>
+        ```
 
 
 ## Task 2: MySQL Document Store
@@ -88,7 +98,7 @@ In this lab, you will:
 
 1. Please connect to MySQL Database via X Protocol
     ```
-    <span style="color:green">shell></span><copy>mysqlsh -uadmin -hmysql1 -P 33070 -p</copy>
+    <span style="color:green">shell></span> <copy>mysqlsh -uadmin -hmysql1 -P 33070 -p</copy>
     ```
 2. Create and use a test schema. 
     (We use javascript mode, but python is available also)
