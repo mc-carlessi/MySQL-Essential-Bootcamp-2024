@@ -16,7 +16,7 @@ In this lab, you will execute MySQL Shell and explore the following on the inter
   * Server: mysql1
   * To close the MySQL Shell you can the commands “\q” or “\exit”
 
-## Task 1: Download MySQL Shell
+## Task 1: Install MySQL Shell on app-srv
 
 1. If not already connected, connect to mysql1 server through app-srv
     ```

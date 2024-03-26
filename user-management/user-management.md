@@ -58,17 +58,17 @@ In this lab, you will:
 5. Test appuser connection
    > Note: Please ignore the error "Error during auto-completion cache update: Access denied..." related to lack of privileges for the user. If you want to disable the message disable autocomplete.nameCache option
     
-    * Connect to mysql-advanced with appuser
-        ```
-        <span style="color:green">shell-app-srv$</span> <copy>mysqlsh -u appuser -p -h mysql1 -P 3307 --sql</copy>
-        ```
-    * Run a select on the tables e.g.
-        ```
-        <span style="color:blue">mysql></span> <copy>USE world;</copy>
-        ```
-        ```
-        <span style="color:blue">mysql></span> <copy>SELECT * FROM city;</copy>
-        ```
+   * Connect to mysql-advanced with appuser
+     ```
+     <span style="color:green">shell-app-srv$</span> <copy>mysqlsh -u appuser -p -h mysql1 -P 3307 --sql</copy>
+     ```
+   * Run a select on the tables e.g.
+     ```
+     <span style="color:blue">mysql></span> <copy>USE world;</copy>
+     ```
+     ```
+     <span style="color:blue">mysql></span> <copy>SELECT * FROM city;</copy>
+     ```
 
 6. (<span style="color:red">admin connection</span>) Switch to the administrative connection revoke privilege on city to appuser
     ```

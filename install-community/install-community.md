@@ -29,13 +29,14 @@ In this lab, you will be guided through the following tasks:
     <span style="color:green">shell-app-srv$</span> <copy>ssh -i $HOME/sshkeys/id_rsa_mysql1 opc@mysql1 </copy>
     ```
 
-4. Which MySQL packages are installed on your Linux?
+3. Which MySQL packages are installed on your Linux?
 
     ```
     <span style="color:green">shell-mysql1></span> <copy>sudo rpm -qa | grep mysql </copy>
     ```
-5. What happens when you try to install the mysql binaries with RedHat repositories? 
-Run this command but <span style="color:red"> don’t confirm </span>
+
+4. What happens when you try to install the mysql binaries with RedHat repositories?  
+    Run this command but <span style="color:red"> ***DON’T CONFIRM !*** </span>
 
     ```
     <span style="color:green">shell-mysql1></span> <copy>sudo yum install mysql </copy>
@@ -43,37 +44,33 @@ Run this command but <span style="color:red"> don’t confirm </span>
 
     As you have seen, above command try to install MariaDB sw. Each distribution has its own repositories and different choices for the packages to install.
 
-6. Because a non-updated PGPkey please run
+5. Because a non-updated PGPkey please run
 
     ```
     <span style="color:green">shell-mysql1></span> <copy>sudo rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2023 </copy>
     ```
 
-7. Oracle Linux 8 already have the official MySQL repository, but to show you how to do it, we install it from the package downloading from https://dev.mysql.com/downloads/
-    
+6. Oracle Linux 8 already have the official MySQL repository, but to show you how to do it, we re-install it from https://dev.mysql.com/downloads/
     ```
-    <span style="color:green">shell-mysql1></span> <copy>wget https://dev.mysql.com/get/mysql80-community-release-el8-1.noarch.rpm </copy>
+    <span style="color:green">shell-mysql1></span> <copy>sudo yum -y install https://dev.mysql.com/get/mysql80-community-release-el8-1.noarch.rpm</copy>
     ```
 
-    ```
-    <span style="color:green">shell-mysql1></span> <copy>sudo yum -y install mysql80-community-release-el8-1.noarch.rpm </copy>
-    ```
-8. Update repository database with the new references
+7. Update repository database with the new references
     ```
     <span style="color:green">shell-mysql1></span> <copy>sudo yum repolist all </copy>
     ```
 
-9. Repeat the command above to install mysql-client (without using the mysql module id default repositories, to force the usage of MySQL ones) and note the different packages
-
+8. Disable the use of OL default repository, to force the usage of one just installed   
     ```
     <span style="color:green">shell-mysql1> </span><copy>sudo yum module disable mysql </copy>
     ```
 
+8. Now install the mysql-client and note that there is not anymore reference to third party components
     ```
     <span style="color:green">shell-mysql1> </span><copy>sudo yum install mysql </copy>
     ```
 
-10. If only mysql packages are shown, confirm the installation.
+9. If only mysql packages are shown, confirm the installation.
 
 ## Task 2: Install MySQL Server
 
