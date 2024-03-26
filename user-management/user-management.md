@@ -3,7 +3,7 @@
 ## Introduction
 In this lab you will explore user creation, their privileges and roles.
 
-Estimated Lab Time: 20 minutes
+Estimated Lab Time: 25 minutes
 
 ### Objectives
 In this lab, you will:

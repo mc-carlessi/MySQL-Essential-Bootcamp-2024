@@ -6,7 +6,7 @@ Replication enables data from one MySQL database server (known as a source) to b
 
 In this lab you will prepare and create a replica.
 
-Estimated Lab Time: 30 minutes
+Estimated Lab Time: 25 minutes
 
 ### Objectives
 In this lab, you will:

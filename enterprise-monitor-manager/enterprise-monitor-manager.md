@@ -5,7 +5,7 @@ MySQL Enterprise Monitor is a companion product to MySQL Server that enables mon
 
 In this lab you will install the MySQL Enterprise Service Manager and Agent.
 
-Estimated Lab Time: 35 minutes
+Estimated Lab Time: 40 minutes
 
 
 

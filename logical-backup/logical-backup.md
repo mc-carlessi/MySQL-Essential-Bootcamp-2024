@@ -7,7 +7,7 @@ MySQL Shell is an advanced client and code editor for MySQL. In addition to the 
 
 In this lab you will see how mysqldump and Mysql Shell dump & load, and compare both.
 
-Estimated Lab Time: 30 minutes
+Estimated Lab Time: 15 minutes
 
 ### Objectives
 In this lab, you will:

@@ -11,7 +11,7 @@ MySQL Enterprise Audit provides an easy to use, policy-based auditing solution t
 MySQL Enterprise Masking and De-identification provides an easy to use, built-in database solution that helps creating views that protect sensitive data from unauthorized uses by hiding and replacing real values with substitutes. Before 8.0.33 Data Masking was a plugin (deprecated), now is available as component with additional options. To use the component in existing installations, please remove the plugin and all of its loadable functions to avoid conflicts (see [here](https://dev.mysql.com/doc/refman/8.0/en/data-masking-components-installation.html)).  
 We test here only a subset of the Data Masking functions.
 
-Estimated Lab Time: 30 minutes
+Estimated Lab Time: 25 minutes
 
 ### Objectives
 In this lab, you will work with:

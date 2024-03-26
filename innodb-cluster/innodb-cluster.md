@@ -6,7 +6,7 @@ An InnoDB Cluster consists of at least three MySQL Server instances, and it prov
 In this lab you will create 3 instances MySQL InnoDB Cluster as Single Primary and have a trial on the MySQL Shell to configure and operate. And you will be using MySQL Router to test for Server routing and test for Failover.
 
 
-Estimated Lab Time: 40 minutes
+Estimated Lab Time: 45 minutes
 
 ### Objectives
 In this lab, you will:

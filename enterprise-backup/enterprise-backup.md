@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Estimated Lab Time:  minutes
+Estimated Lab Time: 15 minutes
 
 ### Objectives
 In this lab, you will:
