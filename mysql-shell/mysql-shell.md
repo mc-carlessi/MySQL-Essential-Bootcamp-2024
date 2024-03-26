@@ -3,7 +3,7 @@
 ## Introduction
 In this lab you will download and start using MySQL Shell.
 
-Estimated Lab Time: 20 minutes
+Estimated Lab Time: 10 minutes
 
 ### Objectives
 In this lab, you will execute MySQL Shell and explore the following on the interface:

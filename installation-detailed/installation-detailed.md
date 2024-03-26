@@ -4,7 +4,7 @@
 
 In this lab you will install MySQL 8 Enterprise on Linux
 
-Estimated Time: 30 minutes
+Estimated Time: 40 minutes
 
 ### Objectives
 

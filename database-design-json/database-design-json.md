@@ -3,7 +3,7 @@
 ## Introduction
 In this lab you will work with JSON datatype and MySQL Document Store.
 
-Estimated Lab Time: 30 minutes
+Estimated Lab Time: 20 minutes
 
 ### Objectives
 In this lab, you will:
