@@ -94,8 +94,8 @@ If not already connected to app-srv and mysql1 then do the following
     <span style="color:green">shell></span> <copy>mysqlsh -h127.0.0.1 -P3307 -uadmin -p </copy>
     ```
 
-2. Export employees database.
-    Please note the time required with the default 4 threads
+2. Export employees database.  
+    Please **note the time required** with the default 4 threads.
     ```
     <span style="color:blue">My</span><span style="color: orange">SQL </span><span style="background-color:yellow">JS</span>><copy>util.dumpSchemas(['employees'],'/mysql/exports/employees')</copy>
     ```
@@ -109,13 +109,13 @@ If not already connected to app-srv and mysql1 then do the following
     <span style="color:blue">My</span><span style="color: orange">SQL </span><span style="background-color:yellow">JS</span>><copy>\sql show databases;</copy>
     ```
 
-5. Enable load files (disabled by default)
+5. Load files is disabled by default, so enable it now to let MysQL Shell execute the load
     ```
     <span style="color:blue">My</span><span style="color: orange">SQL </span><span style="background-color:yellow">JS</span>><copy>\sql set persist local_infile=ON;</copy>
     ```
 
-6. Re import the employees database.
-    Please note the time required with the default 4 threads.
+6. Re import the employees database.  
+    Please **note the time required** with the default 4 threads.
     ```
     <span style="color:blue">My</span><span style="color: orange">SQL </span><span style="background-color:yellow">JS</span>><copy>util.loadDump('/mysql/exports/employees')</copy>
     ```
@@ -131,20 +131,22 @@ If not already connected to app-srv and mysql1 then do the following
     <span style="color:green">shell></span> <copy>mysql_config_editor set --login-path=mysql1 --host=mysql1 --port=3307 --user=admin --password</copy>
     ```
 
-8. Now we can test the export.
-    Please note the time required.
+8. Now we can test the export.  
+    Please **compare the mysqldump time** with the MysQL Shell dump.
     ```
     <span style="color:green">shell></span> <copy>time mysqldump --login-path=mysql1 --single-transaction --set-gtid-purged=OFF --databases employees > /mysql/exports/employees_time_test.sql</copy>
     ```
 
-9. And now drop the database and test the import. 
-    Please note the time required.
+9. And now drop the database employees.  
     ```
     <span style="color:green">shell></span> <copy>mysql --login-path=mysql1 -e "drop database employees"</copy>
     ```
     ```
     <span style="color:green">shell></span> <copy>mysql --login-path=mysql1 -e "show databases"</copy>
     ```
+
+10. And we can check the import time.  
+    Please **compare the mysql import time** with the MysQL load.
     ```
     <span style="color:blue">mysql></span> <copy>time mysql --login-path=mysql1 < /mysql/exports/employees_time_test.sql</copy>
     ```
