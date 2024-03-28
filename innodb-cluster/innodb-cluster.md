@@ -37,7 +37,7 @@ In this lab, you will:
     AND table_schema NOT IN ('information_schema', 'mysql', 'performance_schema');</copy>
     ```
 
-3. Search InnoDB tables without primary or unique key. In production you must fix, here it's enough that you <span style="color:red">drop them</span>
+3. Search InnoDB tables without primary or unique key. In production you must fix.
     ```
     <span style="color:blue">mysql-primary></span> <copy>SELECT tables.table_schema, tables.table_name, tables.engine, tables.table_rows
     FROM information_schema.tables
@@ -58,7 +58,7 @@ In this lab, you will:
         AND tables.table_schema NOT IN ('information_schema', 'mysql', 'performance_schema');</copy>
     ```
 
-4. Most probably we have the table world.city_part without primary key. So let's add one
+4. Most probably we have the table world.city_part without primary key. So let's fix it
     ```
     <span style="color:blue">mysql-primary></span> <copy>desc world.city_part;</copy>
     ```
@@ -515,18 +515,19 @@ In this lab, you will:
     ```
     <span style="color:blue">mysql-rw></span> <copy>SELECT @@hostname, @@port;</copy>
     ```
-7. <span style="color:red">Open a second SSH connection</span> to mysql1 and simulate a crash killing primary instance. To do so retrieve process ID with one of these commands
-    ```
-    <span style="color:green">shell-app-srv$</span> <copy>ssh -i $HOME/sshkeys/id_rsa_mysql1 opc@mysql1</copy>
-    ```
-    ```
-    <span style="color:green">shell-mysql1></span> <copy>cat /mysql/data/*.pid</copy>
-    ```
-    * the kill the process of primary instance to simulate a crash
+7. <span style="color:red">Open a second SSH connection</span> to mysql1 and simulate a crash killing primary instance.
+    * Retrieve process ID
+        ```
+        <span style="color:green">shell-app-srv$</span> <copy>ssh -i $HOME/sshkeys/id_rsa_mysql1 opc@mysql1</copy>
+        ```
+        ```
+        <span style="color:green">shell-mysql1></span> <copy>cat /mysql/data/*.pid</copy>
+        ```
+    * then kill the process of primary instance to simulate a crash
         ```
         <span style="color:green">shell-mysql1></span> <copy>sudo kill -9 <process id from previous step></copy>
         ```
-    * <span style="color:red">Return to mysql connection previously opened</span> and verify if it works. It may requires 15/20 seconds to be online.
+8. Now <span style="color:red">return to mysql connection previously opened</span> and verify if it works. It may requires 15/20 seconds to be online.
         ```
         <span style="color:blue">mysql-rw></span> <copy>SELECT @@hostname, @@port;</copy>
         ```
@@ -540,7 +541,7 @@ In this lab, you will:
         <span style="color:blue">mysql-rw></span> <copy>SELECT * from newdb.newtable;</copy>
         ```
 
-8. From the shell where you killed the instance use MySQL Shell to verify cluster status (of course connect to a living instance)
+9. From the shell where you killed the instance use MySQL Shell to verify cluster status (of course connect to a living instance)
     ```
     <span style="color:green">shell-app-srv$</span> <copy>mysqlsh</copy>
     ```
@@ -553,7 +554,8 @@ In this lab, you will:
     ```
     <span style="color:blue">My</span><span style="color: orange">SQL </span><span style="background-color:yellow">JS</span>> <copy>cluster.status()</copy>
     ```
-9. Optional: restart "crashed" instance and verify with MySQL Shell how it changes the status
+
+10. Optional: restart "crashed" instance and verify with MySQL Shell how it changes the status
     ```
     <span style="color:blue">My</span><span style="color: orange">SQL </span><span style="background-color:yellow">JS</span>> <copy>cluster.status()</copy>
     ```
