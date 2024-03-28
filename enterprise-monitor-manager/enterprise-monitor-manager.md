@@ -94,14 +94,13 @@ In this lab, you will:
     Admin password:<copy>Welcome1!</copy>
     Auto-Create Less Privileged Users:<copy>No</copy>
     ```
-    ![MYSQLEE](images/monitor-connect-instance.png "monitor connect instance")
 
     > **Note:**
-        Due to a bug, before confirm execute these additional steps
+        Due to a bug, before confirm execute these additional steps  
+        1. In **"Connect Using"** box select "Socket"  
+        2. In **"Connect Using"** box restore the previous value "TCP/IP"  
 
-        1. In **"Connect Using"** box select "Socket"
-
-        2. In **"Connect Using"** box restore the previous value "TCP/IP"
+    ![MYSQLEE](images/monitor-connect-instance.png "monitor connect instance")
 
 11. Now confirm with the button “Add Instance”
 
@@ -173,14 +172,14 @@ In this lab, you will:
         ```
         Admin password:<copy>Welcome1!</copy>
         ```
-    ![MYSQLEE](images/monitor-new-agent.png "monitor new agent")
 
     > **Note:**
-        Due to a bug, before confirm execute these additional steps
+        Due to a bug, before confirm execute these additional steps  
+        1. In **"Connect Using"** box select "Socket"  
+        2. In **"Connect Using"** box restore the previous value "TCP/IP"  
 
-        1. In **"Connect Using"** box select "Socket"
+    ![MYSQLEE](images/monitor-new-agent.png "monitor new agent")
 
-        2. In **"Connect Using"** box restore the previous value "TCP/IP"
 
 
 6. Click “Edit Instance” button

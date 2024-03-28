@@ -16,74 +16,67 @@ In this lab, you will:
   * Servers:
     * app-srv as client (used by appuser)
     * mysql1 as mysql server
-  * Use two shells, both can be from app-srv
+  * Use two shells connections, one for administrative commands and the other for the user connection test
 
-1. If not already connected, connect to app-srv and retrieve the Private IP (this info is also available in OCI dashboard)
+
+1. If you are not already connected, open connect to app-srv and install the mysql and mysqlsh clients 
+    ```
+    <span style="color:green">shell-app-srv$</span> <copy>sudo yum -y install /workshop/linux/client/*.rpm</copy>
+    ```
+
+2. To simplify our activity, set the the autosave.  
+    (please note the syntax that let you use MySQL Shell in command line)
+    ```
+    <span style="color:green">shell-app-srv$</span> <copy>mysqlsh -- shell options set-persist history.autoSave true</copy>
+    ```
+
+3. Connect to your <span style="color:red">mysql-advanced</span> with admin user
+    ```
+    <span style="color:green">shell-app-srv></span> <copy>mysqlsh -uadmin -p -h mysql1 -P 3307 --sql</copy>
+    ```
+
+4. Create a new user and restrict the user to your “app-srv.%”. In the real life, you probably use a specific fqdn, here we test a connection with jolly characters 
+    ```
+    <span style="color:blue">mysql></span> <copy>CREATE USER 'appuser'@'app-srv.%' IDENTIFIED BY 'Welcome1!';</copy>
+    ```
+
+5. Grant to the new user privileges to work on world database
+    ```
+    <span style="color:blue">mysql></span> <copy>GRANT ALL PRIVILEGES ON world.* TO 'appuser'@'app-srv.%';</copy>
+    ```
+    ```
+    <span style="color:blue">mysql></span> <copy>SHOW GRANTS FOR 'appuser'@'app-srv.%';</copy>
+    ```
+ 
+6. <span style="color:red">Keep previous connection open</span> and open a new shell connection to app-srv, then connect as user appuser to mysql1 to test the connection.  
+   > Note:  
+        * Please remember that the user "appuser" can connect only from this server  
+        * Please ignore the error "Error during auto-completion cache update: Access denied..." related to lack of privileges for the user. If you want to disable the message disable **autocomplete.nameCache** option  
     
-    Write it down.
+   ```
+   <span style="color:green">shell-app-srv$</span> <copy>mysqlsh -u appuser -p -h mysql1 -P 3307 --sql</copy>
+   ```
+   ```
+   <span style="color:blue">mysql></span> <copy>USE world;</copy>
+   ```
+   ```
+   <span style="color:blue">mysql></span> <copy>SELECT * FROM city limit 10;</copy>
+   ```
+
+7. (<span style="color:red">admin connection</span>) Switch to the administrative connection revoke privilege on city to appuser
     ```
-    <span style="color:green">shell-app-srv$</span> <copy>ifconfig | grep 10.0</copy>
+    <span style="color:blue">mysql></span> <copy>REVOKE SELECT ON world.* FROM 'appuser'@'app-srv.%';</copy>
     ```
-    
-2. <span style="color:red">Keep previous connection open and open a new connection </span>to mysql1 server thought app-srv
     ```
-    <span style="color:green">shell-app-srv$</span> <copy>ssh -i $HOME/sshkeys/id_rsa_mysql1 opc@mysql1</copy>
+    <span style="color:blue">mysql></span> <copy>SHOW GRANTS FOR 'appuser'@'app-srv.%';</copy>
     ```
 
-3. Connect to your <span style="color:red">mysql-advanced</span> with administrative user (<span style="color:red">keep it open</span>)
+8. (<span style="color:red">appuser connection</span>) Repeat the select on for the user. There is a difference?
     ```
-    <span style="color:green">shell-app-srv$</span> <copy>mysqlsh -uadmin -p -h mysql1 -P 3307 --sql</copy>
-    ```
-    * Create a new user and restrict the user to your “app-srv” IP
-        ```
-        <span style="color:blue">mysql></span> <copy>CREATE USER 'appuser'@<app-srv_ip> IDENTIFIED BY 'Welcome1!';</copy>
-        ```
-        ```
-        <span style="color:blue">mysql></span> <copy>GRANT ALL PRIVILEGES ON world.* TO 'appuser'@<app-srv_ip>;</copy>
-        ```
-        ```
-        <span style="color:blue">mysql></span> <copy>SHOW GRANTS FOR 'appuser'@<app-srv_ip>;</copy>
-        ```
-
-4. Open a <span style="color:red">new shell on app-srv</span> install the clients and configure some useful variables 
-    * Install mysql client and mysqlsh
-        ```
-        <span style="color:green">shell-app-srv$</span> <copy>sudo yum -y install /workshop/linux/client/*.rpm</copy>
-        ```
-    * Configure autosave (please note the different syntx that let you use MySQL Shell in command line)
-        ```
-        <span style="color:green">shell-app-srv$</span> <copy>mysqlsh -- shell options set-persist history.autoSave true</copy>
-        ```
-
-5. Test appuser connection
-   > Note: Please ignore the error "Error during auto-completion cache update: Access denied..." related to lack of privileges for the user. If you want to disable the message disable autocomplete.nameCache option
-    
-   * Connect to mysql-advanced with appuser
-     ```
-     <span style="color:green">shell-app-srv$</span> <copy>mysqlsh -u appuser -p -h mysql1 -P 3307 --sql</copy>
-     ```
-   * Run a select on the tables e.g.
-     ```
-     <span style="color:blue">mysql></span> <copy>USE world;</copy>
-     ```
-     ```
-     <span style="color:blue">mysql></span> <copy>SELECT * FROM city;</copy>
-     ```
-
-6. (<span style="color:red">admin connection</span>) Switch to the administrative connection revoke privilege on city to appuser
-    ```
-    <span style="color:blue">mysql></span> <copy>REVOKE SELECT ON world.* FROM 'appuser'@<app-srv_ip>;</copy>
-    ```
-    ```
-    <span style="color:blue">mysql></span> <copy>SHOW GRANTS FOR 'appuser'@<app-srv_ip>;</copy>
+    <span style="color:blue">mysql></span> <copy>SELECT * FROM city limit 10;</copy>
     ```
 
-7. (<span style="color:red">appuser connection</span>) Repeat the select on for the user. There is a difference?
-    ```
-    <span style="color:blue">mysql></span> <copy>SELECT * FROM city;</copy>
-    ```
-
-8. (<span style="color:red">appuser connection</span>) Close and reopen the appuser connection, then repeat above commands. There is a difference?
+9. (<span style="color:red">appuser connection</span>) Close and reopen the appuser connection, then repeat above commands. There is a difference?
     ```
     <span style="color:blue">mysql></span> <copy>\q</copy>
     ```
@@ -97,70 +90,67 @@ In this lab, you will:
     <span style="color:blue">mysql></span> <copy>USE world;</copy>
     ```
     ```
-    <span style="color:blue">mysql></span> <copy>SELECT * FROM city;</copy>
+    <span style="color:blue">mysql></span> <copy>SELECT * FROM city limit 10;</copy>
     ```
 
-9. (<span style="color:red">admin connection</span>) Switch to the administrative connection revoke ‘USAGE’ privilege using and administrative connection and verify 
-    (tip: this privilege can’t be revoked...)
+10. (<span style="color:red">admin connection</span>) Switch to the administrative connection revoke ‘USAGE’ privilege using and administrative connection and verify if something changed.  
+    As you can see, 'USAGE' privilege can’t be revoked.  
     ```
-    <span style="color:blue">mysql></span> <copy>REVOKE USAGE ON *.* FROM 'appuser'@<app-srv_ip>;</copy>
-    ```
-    ```
-    <span style="color:blue">mysql></span> <copy>SHOW GRANTS FOR 'appuser'@<app-srv_ip>;</copy>
-    ```
-
-10. (<span style="color:red">admin connection</span>) Using the administrative connection revoke all privileges using and administrative connection and verify
-    ```
-    <span style="color:blue">mysql></span> <copy>REVOKE ALL PRIVILEGES ON *.* FROM 'appuser'@<app-srv_ip>;</copy>
+    <span style="color:blue">mysql></span> <copy>REVOKE USAGE ON *.* FROM 'appuser'@'app-srv.%';</copy>
     ```
     ```
-    <span style="color:blue">mysql></span> <copy>SHOW GRANTS FOR 'appuser'@<app-srv_ip>;</copy>
+    <span style="color:blue">mysql></span> <copy>SHOW GRANTS FOR 'appuser'@'app-srv.%';</copy>
     ```
 
-11. (<span style="color:red">appuser connection</span>) Close and reopen appuser session, do you see schemas?
+11. (<span style="color:red">admin connection</span>) Using the administrative connection revoke all privileges using and administrative connection and verify
     ```
-    <span style="color:blue">mysql></span> <copy>\q</copy>
+    <span style="color:blue">mysql></span> <copy>REVOKE ALL PRIVILEGES ON *.* FROM 'appuser'@'app-srv.%';</copy>
     ```
     ```
-    <span style="color:green">shell-app-srv$</span> <copy>mysqlsh -u appuser -p -h mysql1 -P 3307 --sql</copy>
+    <span style="color:blue">mysql></span> <copy>SHOW GRANTS FOR 'appuser'@'app-srv.%';</copy>
     ```
+
+12. (<span style="color:red">appuser connection</span>) Global privileges changes take effect immediately. Check it now that user lost all privileges over world database
     ```
     <span style="color:blue">mysql></span> <copy>SHOW DATABASES;</copy>
     ```
 
-12. (<span style="color:red">admin connection</span>) Using the administrative connection restore user privileges to reuse it in next labs
+13. (<span style="color:red">admin connection</span>) Using the administrative connection restore user privileges to reuse it in next labs
     ```
-    <span style="color:blue">mysql></span> <copy>GRANT ALL PRIVILEGES ON world.* TO 'appuser'@<app-srv_ip>;</copy>
+    <span style="color:blue">mysql></span> <copy>GRANT ALL PRIVILEGES ON world.* TO 'appuser'@'app-srv.%';</copy>
     ```
 
-13. (<span style="color:red">admin connection</span>) We play now with password enforcements settings. First load the password validation component
+14. (<span style="color:red">admin connection</span>) We play now with password enforcements settings. First load the password validation component
     ```
     <span style="color:blue">mysql></span> <copy>INSTALL COMPONENT 'file://component_validate_password';</copy>
     ```
 
-14. (<span style="color:red">admin connection</span>) Check now the password requirements
+15. (<span style="color:red">admin connection</span>) Check now the password requirements
     ```
     <span style="color:blue">mysql></span> <copy>SHOW VARIABLES LIKE 'validate_password%';</copy>
     ```
 
-15. (<span style="color:red">appuser connection</span>) Try to set unsecure passwords for appuser
+16. (<span style="color:red">appuser connection</span>) Try to set unsecure passwords for appuser
     ```
-    <span style="color:blue">mysql></span> <copy>alter user 'appuser'@<app-srv_ip> identified by 'appuser';</copy>
-    ```
-    ```
-    <span style="color:blue">mysql></span> <copy>alter user 'appuser'@<app-srv_ip> identified by 'Welcome';</copy>
+    <span style="color:blue">mysql></span> <copy>ALTER USER 'appuser'@'app-srv.%' IDENTIFIED BY 'appuser';</copy>
     ```
     ```
-    <span style="color:blue">mysql></span> <copy>alter user 'appuser'@<app-srv_ip>identified by 'We1!';</copy>
+    <span style="color:blue">mysql></span> <copy>ALTER USER 'appuser'@'app-srv.%' IDENTIFIED BY 'Welcome';</copy>
     ```
-
-16. (<span style="color:red">admin connection</span>) Expire the password for appuser
     ```
-    <span style="color:blue">mysql></span> <copy>alter user 'appuser'@<app-srv_ip> PASSWORD EXPIRE;</copy>
+    <span style="color:blue">mysql></span> <copy>ALTER USER 'appuser'@'app-srv.%'IDENTIFIED BY 'We1!';</copy>
     ```
 
-17. (<span style="color:red">appuser connection</span>) Close and reopen connection to mysql-advanced and try to submit a command.
+17. (<span style="color:red">admin connection</span>) Expire the password for appuser
+    ```
+    <span style="color:blue">mysql></span> <copy>ALTER USER 'appuser'@'app-srv.%' PASSWORD EXPIRE;</copy>
+    ```
+
+18. (<span style="color:red">appuser connection</span>) Close and reopen connection to mysql-advanced and try to submit a command.  
     What changed?
+    ```
+    <span style="color:blue">mysql></span> <copy>\q</copy>
+    ```
     ```
     <span style="color:green">shell-app-srv$</span> <copy>mysqlsh -uappuser -p -h mysql1 -P 3307 --sql</copy>
     ```
@@ -170,10 +160,11 @@ In this lab, you will:
     ```
     <span style="color:blue">mysql></span> <copy>SET PASSWORD='Welcome1!';</copy>
     ```
+    ```
+    <span style="color:blue">mysql></span> <copy>SHOW DATABASES;</copy>
+    ```
 
 ## Task 2: User Roles
- > **Note:**
-  * This lab uses only mysql client connection, so it can be executed from any server (app-srv or mysql1)
 
 1. If not already connected, connect to mysql1 through app-srv
     ```
