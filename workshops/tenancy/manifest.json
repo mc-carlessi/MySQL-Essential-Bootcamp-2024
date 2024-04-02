@@ -53,19 +53,19 @@
             "filename": "../../enterprise-backup/enterprise-backup.md"
         },
         {
-            "title": "Lab 6: MySQL Replication",
+            "title": "Lab 6a: MySQL Replication",
             "filename": "../../replication/replication.md"
         },
         {
-            "title": "Lab 7: MySQL InnoDB Cluster",
+            "title": "Lab 7a: MySQL InnoDB Cluster",
             "filename": "../../innodb-cluster/innodb-cluster.md"
         },
         {
-            "title": "Lab 8: MySQL Enterprise Monitor",
+            "title": "Lab 8a: MySQL Enterprise Monitor",
             "filename": "../../enterprise-monitor-manager/enterprise-monitor-manager.md"
         },
         {
-            "title": "Lab 9: Demo MySQL HeatWave",
+            "title": "Demo: MySQL HeatWave",
             "filename": "../../mysql-heatwave/mysql-heatwave.md"
         },
         {

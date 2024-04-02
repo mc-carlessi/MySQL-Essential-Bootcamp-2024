@@ -1,7 +1,9 @@
 # User management
 
 ## Introduction
-In this lab you will explore user creation, their privileges and roles.
+In this lab you will explore user creation, their privileges and roles.  
+We start with the creation of a user that can connect only from a specific client, we grant and revoke privileges and try to assign a weak password.  
+In the second task we create a new user with a role.
 
 Estimated Lab Time: 25 minutes
 
