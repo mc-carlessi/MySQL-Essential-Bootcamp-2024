@@ -201,7 +201,7 @@ In this lab, you will work with:
     <span style="color:blue">mysql></span> <copy>\q</copy>
     ```
 
-4. Open the audit.log file the datadir and verify the content
+4. Open the audit.log file in the datadir and verify the content
     ```
     <span style="color:green">shell-mysql1></span> <copy>nano /mysql/data/audit.log</copy>
     ```

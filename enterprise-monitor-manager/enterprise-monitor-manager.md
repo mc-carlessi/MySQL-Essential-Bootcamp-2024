@@ -120,7 +120,7 @@ In this lab, you will:
 16. Are you able to see your mysql1 in the list of hosts? Why not?
 
 
-## Task 2: Install Monitor Agent
+## (Optional) Task 2: Install Monitor Agent
 > **Note:**
  * Servers:
     * App-srv for Enterprise Monitor

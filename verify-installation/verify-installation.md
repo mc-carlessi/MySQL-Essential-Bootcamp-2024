@@ -37,12 +37,12 @@ In this lab, you will:
 
   | Command | Port 3306 or 3307? | SSL is used? | Socket or TCP connection? |
   | ------- | ------------------ | ------------ | ------------------------- |
-  | <span style="color:green">shell></span> mysql -u root -p<br> <span style="color:blue"> mysql></span> status; |   |   |   |
-  | <span style="color:green">shell></span> mysql -u root -p -P **3306** <br> <span style="color:blue"> mysql></span> status; |   |   |   |
-  | <span style="color:green">shell></span> mysql -u root -p -P **3307** <br> <span style="color:blue"> mysql></span> status; |   |   |   |
-  | <span style="color:green">shell></span> mysql -u root -p -h **localhost** -P **3307** <br> <span style="color:blue"> mysql></span> status; |   |   |   |
-  | <span style="color:green">shell></span> mysql -u root -p -h **127.0.0.1** -P **3307** <br> <span style="color:blue"> mysql></span> status; |   |   |   |
-  | <span style="color:green">shell></span> mysql -u root -p -h **mysql1** -P **3307** <br> <span style="color:blue"> mysql></span> status; |   |   |   |
+  | <span style="color:green">shell></span> /usr/bin/mysql -u admin -p<br> <span style="color:blue"> mysql></span> status; |   |   |   |
+  | <span style="color:green">shell></span> /usr/bin/mysql -u admin -p -P **3306** <br> <span style="color:blue"> mysql></span> status; |   |   |   |
+  | <span style="color:green">shell></span> /usr/bin/mysql -u admin -p -P **3307** <br> <span style="color:blue"> mysql></span> status; |   |   |   |
+  | <span style="color:green">shell></span> /usr/bin/mysql -u admin -p -h **localhost** -P **3307** <br> <span style="color:blue"> mysql></span> status; |   |   |   |
+  | <span style="color:green">shell></span> /usr/bin/mysql -u admin -p -h **127.0.0.1** -P **3307** <br> <span style="color:blue"> mysql></span> status; |   |   |   |
+  | <span style="color:green">shell></span> /usr/bin/mysql -u admin -p -h **mysql1** -P **3307** <br> <span style="color:blue"> mysql></span> status; |   |   |   |
 
 
 ## Task 2: Remove Community and import databases
@@ -68,6 +68,14 @@ In this lab, you will:
     ```
     ```
     <span style="color:green">shell-mysql1></span> <copy>mysql -uadmin -p -P3307 -h mysql1 < ./employees.sql</copy>
+    ```
+
+5. Check that we have now the world and employees demo databases in our instance  
+    ```
+    <span style="color:green">shell-mysql1></span> <copy>cd /workshop/databases/employees</copy>
+    ```
+    ```
+    <span style="color:green">shell-mysql1></span> <copy>mysql -uadmin -p -P3307 -h mysql1 -e "SHOW DATABASES"</copy>
     ```
 
 ## Acknowledgements

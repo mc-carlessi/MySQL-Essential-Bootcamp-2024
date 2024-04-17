@@ -13,7 +13,6 @@ In this lab, you will:
 
 > **Note:** 
   * Server: mysql1
-  * Tasks 2 and 3 can be completed from app-srv
 
 ## Task 1: Work with SQL
 1. Connect to your <span style="color:red">mysql-advanced</span> with admin user
@@ -70,12 +69,7 @@ In this lab, you will:
     <span style="color:blue">mysql></span> <copy>SELECT * FROM INFORMATION_SCHEMA.STATISTICS WHERE table_name ='city' and table_schema='world'\G</copy>
     ```
 
-10. Create a new index
-    ```
-    <span style="color:blue">mysql></span> <copy>CREATE INDEX myccindex ON city_part (CountryCode);</copy>
-    ```
-
-11. Delete some columns (Population and CountryCode)
+10. Delete some columns (Population and CountryCode)
     ```
     <span style="color:blue">mysql></span> <copy>ALTER TABLE city_part DROP COLUMN Population;</copy>
     ```
@@ -83,13 +77,13 @@ In this lab, you will:
     <span style="color:blue">mysql></span> <copy>ALTER TABLE city_part DROP COLUMN CountryCode;</copy>
     ```
 
-12. Optimize the table
+11. Optimize the table
     ```
     <span style="color:blue">mysql></span> <copy>OPTIMIZE TABLE city_part;</copy>
     ```
     > **Note:** warning is expected: https://dev.mysql.com/doc/refman/8.0/en/optimize-table.html
 
-13. Update table statistics
+12. Update table statistics
     ```
     <span style="color:blue">mysql></span> <copy>ANALYZE TABLE city_part;</copy>
     ```

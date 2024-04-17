@@ -81,6 +81,10 @@
             "filename": "../../addendum-environment-creation/addendum-environment-creation.md"
         },
         {
+            "title": "Change log",
+            "filename": "../../changelog/changelog.md"
+        },
+        {
             "title": "Need Help?",
             "description": "Solutions to Common Problems and Directions for Receiving Live Help",
             "filename":"https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"

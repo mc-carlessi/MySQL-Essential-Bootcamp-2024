@@ -244,6 +244,10 @@ In this lab, you will:
     <span style="color:blue">mysql></span> <copy>ALTER USER 'appuser2'@'%' DEFAULT ROLE 'app_read';</copy>
     ```
 
+6. Now you can exit from appuser2 connection
+    ```
+    <span style="color:blue">mysql></span> <copy>\q</copy>
+    ```
 
 
 ## Acknowledgements
