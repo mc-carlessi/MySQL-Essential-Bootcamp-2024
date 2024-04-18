@@ -555,11 +555,6 @@ In this lab, you will:
     <span style="color:blue">My</span><span style="color: orange">SQL </span><span style="background-color:yellow">JS</span>> <copy>cluster.status()</copy>
     ```
 
-10. Optional: restart "crashed" instance and verify with MySQL Shell how it changes the status
-    ```
-    <span style="color:blue">My</span><span style="color: orange">SQL </span><span style="background-color:yellow">JS</span>> <copy>cluster.status()</copy>
-    ```
-
 
 ## Acknowledgements
 * **Author** - Marco Carlessi, Principal Sales Consultant
