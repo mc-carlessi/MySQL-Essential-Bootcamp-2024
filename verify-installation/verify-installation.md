@@ -37,12 +37,12 @@ In this lab, you will:
 
   | Command | Port 3306 or 3307? | SSL is used? | Socket or TCP connection? |
   | ------- | ------------------ | ------------ | ------------------------- |
-  | <span style="color:green">shell></span> /usr/bin/mysql -u admin -p<br> <span style="color:blue"> mysql></span> status; |   |   |   |
-  | <span style="color:green">shell></span> /usr/bin/mysql -u admin -p -P **3306** <br> <span style="color:blue"> mysql></span> status; |   |   |   |
-  | <span style="color:green">shell></span> /usr/bin/mysql -u admin -p -P **3307** <br> <span style="color:blue"> mysql></span> status; |   |   |   |
-  | <span style="color:green">shell></span> /usr/bin/mysql -u admin -p -h **localhost** -P **3307** <br> <span style="color:blue"> mysql></span> status; |   |   |   |
-  | <span style="color:green">shell></span> /usr/bin/mysql -u admin -p -h **127.0.0.1** -P **3307** <br> <span style="color:blue"> mysql></span> status; |   |   |   |
-  | <span style="color:green">shell></span> /usr/bin/mysql -u admin -p -h **mysql1** -P **3307** <br> <span style="color:blue"> mysql></span> status; |   |   |   |
+  | <span style="color:green">shell></span> mysql -u root -p<br> <span style="color:blue"> mysql></span> status; |   |   |   |
+  | <span style="color:green">shell></span> mysql -u root -p -P **3306** <br> <span style="color:blue"> mysql></span> status; |   |   |   |
+  | <span style="color:green">shell></span> mysql -u root -p -P **3307** <br> <span style="color:blue"> mysql></span> status; |   |   |   |
+  | <span style="color:green">shell></span> mysql -u root -p -h **localhost** -P **3307** <br> <span style="color:blue"> mysql></span> status; |   |   |   |
+  | <span style="color:green">shell></span> mysql -u root -p -h **127.0.0.1** -P **3307** <br> <span style="color:blue"> mysql></span> status; |   |   |   |
+  | <span style="color:green">shell></span> mysql -u **admin** -p -h **mysql1** -P **3307** <br> <span style="color:blue"> mysql></span> status; |   |   |   |
 
 
 ## Task 2: Remove Community and import databases

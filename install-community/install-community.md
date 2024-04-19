@@ -98,6 +98,10 @@ In this lab, you will be guided through the following tasks:
     ```
     <span style="color:green">shell-mysql1></span> <copy>sudo systemctl status mysqld</copy>
     ```
+4. Now enable automatic startup of mysqld service
+    ```
+    <span style="color:green">shell-mysql1></span> <copy>sudo systemctl enable mysqld</copy>
+    ```
 
 ## Task 3: Change root password and create admin account
 1. Check the content of my.cnf, that is in default folder for linux OS and note the following info (lines that start with “#”are just comments)
@@ -156,7 +160,13 @@ In this lab, you will be guided through the following tasks:
     <span style="color:blue">mysql></span> <copy>show variables like "%version%";</copy>
     ```
 
-9. The root account can connect only locally, so we create now the 'admin'@'%' account that can connect remotely 
+9. Check default users in standard installation
+
+    ```
+    <span style="color:blue">mysql></span> <copy>SELECT user, host FROM mysql.user WHERE user='root';</copy>
+    ```
+
+10. The root account can connect only locally, so we create now the 'admin'@'%' account that can connect remotely 
     ```
     <span style="color:blue">mysql></span> <copy>CREATE USER admin@'%' identified by 'Welcome1!';</copy>
     ```
@@ -164,11 +174,6 @@ In this lab, you will be guided through the following tasks:
     <span style="color:blue">mysql></span> <copy>GRANT ALL ON *.* TO admin@'%' WITH GRANT OPTION;</copy>
     ```
 
-10. Check default users in standard installation
-
-    ```
-    <span style="color:blue">mysql></span> <copy>SELECT user, host FROM mysql.user WHERE user='root';</copy>
-    ```
 
 ## Learn More
 * https://dev.mysql.com/doc/mysql-yum-repo-quick-guide/en/
