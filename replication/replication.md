@@ -42,7 +42,7 @@ In this lab, you will:
 
 5. <span style="color:red">Close and reopen the SSH connection to mysql2 server</span> to let opc user have the new group.
     ```
-    <span style="color:green">shell-app-srv$</span> <copy>\q</copy>
+    <span style="color:green">shell-mysql2></span> <copy>exit</copy>
     ```
     ```
     <span style="color:green">shell-app-srv$</span> <copy>ssh -i $HOME/sshkeys/id_rsa_mysql2 opc@mysql2</copy>

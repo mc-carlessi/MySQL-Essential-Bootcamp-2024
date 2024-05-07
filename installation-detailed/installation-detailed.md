@@ -73,6 +73,12 @@ Create a new user/group for your MySQL service (mysqluser/mysqlgrp) and a add â€
         ```
 
 7. <span style="color:red">Close the ssh session and reopen it to activate the new privilege and settings for opc user</span>
+    ```
+    <span style="color:green">shell-mysql1></span> <copy>exit</copy>
+    ```
+    ```
+    <span style="color:green">shell-app-srv$</span> <copy>ssh -i $HOME/sshkeys/id_rsa_mysql1 opc@mysql1 </copy>
+    ```
 
 8. Extract the tarball in your /mysql folder
     ```

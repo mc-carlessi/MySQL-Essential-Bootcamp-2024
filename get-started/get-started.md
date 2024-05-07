@@ -19,7 +19,8 @@ In this lab, you will be guided through the following tasks:
 1. Download from provided link all materials in WORK_DIRECTORY
     The materials include:
     * Lectures slides in pdf
-    * lab guide in pdf
+    * ssh key to access lab
+    * server list assignment
 
 ## Task 2: Verify connection to the app-srv 
 
