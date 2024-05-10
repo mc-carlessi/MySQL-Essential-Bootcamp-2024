@@ -16,7 +16,7 @@ In this lab, you will execute MySQL Shell and explore the following on the inter
   * Server: mysql1
   * To close the MySQL Shell you can the commands “\q” or “\exit”
 
-## Task 1: Install MySQL Shell on app-srv
+## Task 1: Install MySQL Shell on mysql1
 
 1. If not already connected, connect to mysql1 server through app-srv
     ```
@@ -50,7 +50,7 @@ In this lab, you will execute MySQL Shell and explore the following on the inter
     ```
 7. Close and reopen the session and in the new one **uses the arrow up key** to verify that the data from previous session are available
     ```
-    <span style="color:blue">My</span><span style="color: orange">SQL </span><span style="background-color:yellow">JS</span>><copy>exit</copy>
+    <span style="color:blue">My</span><span style="color: orange">SQL </span><span style="background-color:yellow">JS</span>><copy>\q</copy>
     ```
     ```
     <span style="color:green">shell-mysql1></span> <copy>mysqlsh</copy>
@@ -90,7 +90,7 @@ In this lab, you will execute MySQL Shell and explore the following on the inter
     <span style="color:blue">My</span><span style="color: orange">SQL </span><span style="color:white"><span style="background-color:orange">SQL</span></span>><copy>\py</copy>
     ```
     ```
-    <span style="color:blue">My</span><span style="color: orange">SQL </span><span style="color:white"><span style="background-color:blue">Py</span></span>><copy>\py</copy>
+    <span style="color:blue">My</span><span style="color: orange">SQL </span><span style="color:white"><span style="background-color:blue">Py</span></span>><copy>\js</copy>
     ```
 5. Exit from MySQL Shell with “\q” or “\exit”
     ```

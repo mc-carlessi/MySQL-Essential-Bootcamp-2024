@@ -88,6 +88,11 @@ In this lab, you will:
     <span style="color:blue">mysql></span> <copy>ANALYZE TABLE city_part;</copy>
     ```
 
+13. Exit from client
+    ```
+    <span style="color:blue">mysql></span> <copy>\q</copy>
+    ```
+
 
 ## Acknowledgements
 * **Author** - Marco Carlessi, Principal Sales Consultant

@@ -58,15 +58,17 @@ In this lab, you will work with:
     <span style="color:blue">mysql></span> <copy>GRANT FIREWALL_ADMIN, FIREWALL_EXEMPT on *.* to admin@'%';</copy>
     ```
 
-7. Now create a firewall group profile in recording mode, and add the new user
-    ```
-    <span style="color:blue">mysql></span> <copy>CALL mysql.sp_set_firewall_group_mode('fwgrp', 'RECORDING');</copy>
-    ```
+7. Create a firewall group profile (called 'fwgrp') and assign fwtest user
     ```
     <span style="color:blue">mysql></span> <copy>CALL mysql.sp_firewall_group_enlist('fwgrp', 'fwtest@%');</copy>
     ```
 
-8. Open a <span style="color:red">second SSH</span> connection and use it to connect as “fwtest” from app-srv
+8. Set the new group in recording mode
+    ```
+    <span style="color:blue">mysql></span> <copy>CALL mysql.sp_set_firewall_group_mode('fwgrp', 'RECORDING');</copy>
+    ```
+
+9. Open a <span style="color:red">second SSH</span> connection and use it to connect as “fwtest” from app-srv
     ```
     <span style="color:green">shell-mysql1></span> <copy>mysqlsh -ufwtest -p -P3307 -hmysql1 --sql</copy>
     ```
@@ -80,17 +82,17 @@ In this lab, you will work with:
     <span style="color:blue">mysql></span> <copy>SELECT Code, Name, Region FROM country WHERE population > 200000;</copy>
     ```
 
-9. <span style="color:red">Administrative connection:</span> Return to admin session (first SSH connection terminal) and verify that there are now rules in allowlist
+10. <span style="color:red">Administrative connection:</span> Return to admin session (first SSH connection terminal) and verify that there are now rules in allowlist
     ```
     <span style="color:blue">mysql></span> <copy>SELECT RULE FROM performance_schema.firewall_group_allowlist WHERE NAME = 'fwgrp';</copy>
     ```
 
-10. <span style="color:red">Administrative connection:</span> switch Firewall mode from **'recording'** to **'protecting'** and verify the presence of rules in allowlist
+11. <span style="color:red">Administrative connection:</span> switch Firewall mode from **'recording'** to **'protecting'** and verify the presence of rules in allowlist
     ```
     <span style="color:blue">mysql></span> <copy>CALL mysql.sp_set_firewall_group_mode('fwgrp', 'PROTECTING');</copy>
     ```
 
-11. <span style="color:red">fwtest connection:</span> run these commands. Which one’s work? Which ones fail and why?
+12. <span style="color:red">fwtest connection:</span> run these commands. Which one’s work? Which ones fail and why?
     ```
     <span style="color:blue">mysql></span> <copy>USE world;</copy>
     ```
@@ -110,22 +112,22 @@ In this lab, you will work with:
     <span style="color:blue">mysql></span> <copy>SELECT Code, Name, Region FROM country WHERE population > 200000 or 1=1;</copy>
     ```
 
-12. <span style="color:red">Administrative connection:</span>Set now firewall in **detecting** mode
+13. <span style="color:red">Administrative connection:</span>Set now firewall in **detecting** mode
     ```
     <span style="color:blue">mysql></span> <copy>CALL mysql.sp_set_firewall_mode('fwtest@%', 'DETECTING');</copy>
     ```
 
-13. Firewall messages rewuires to increase the default log level
+14. Firewall messages rewuires to increase the default log level
     ```
-    <span style="color:blue">mysql></span> <copy>SET GLOBAL log_error_verbosity=3;</copy>
+    <span style="color:blue">mysql></span> <copy>SET PERSIST log_error_verbosity=3</copy>
     ```
 
-14. <span style="color:red">fwtest connection:</span> Repeat a blocked command (it works? Why?)
+15. <span style="color:red">fwtest connection:</span> Repeat a blocked command (it works? Why?)
     ```
     <span style="color:blue">mysql></span> <copy>SELECT Code, Name, Region FROM world.country WHERE population > 200000 or 1=1;</copy>
     ```
 
-15. <span style="color:red">Administrative connection:</span>Now exit from administrative session on mysql1 and search the error in the error log.
+16. <span style="color:red">Administrative connection:</span>Now exit from administrative session on mysql1 and search the error in the error log.
     ```
     <span style="color:blue">mysql></span> <copy>\q</copy>
     ```
@@ -133,7 +135,7 @@ In this lab, you will work with:
     <span style="color:green">shell-mysql1></span> <copy>grep "MY-011191" /mysql/log/err_log.log</copy>
     ```
 
-16. <span style="color:red">Administrative connection:</span> Error log can also be interrogated also from the client.
+17. <span style="color:red">Administrative connection:</span> Error log can also be interrogated also from the client.
     ```
     <span style="color:green">shell-mysql1></span> <copy>mysqlsh -uadmin -p -h mysql1 -P 3307 --sql</copy>
     ```
@@ -141,7 +143,7 @@ In this lab, you will work with:
     <span style="color:blue">mysql></span> <copy>SELECT * FROM performance_schema.error_log WHERE ERROR_CODE='MY-011191';</copy>
     ```
 
-17. <span style="color:red">Administrative connection:</span>Disable now the firewall and exit from the client
+18. <span style="color:red">Administrative connection:</span>Disable now the firewall and exit from the client
     ```
     <span style="color:blue">mysql></span> <copy>CALL mysql.sp_set_firewall_mode('fwtest@%', 'OFF');</copy>
     ```
@@ -248,21 +250,21 @@ In this lab, you will work with:
         ```
         <span style="color:blue">mysql></span> <copy>SELECT mask_outer(NAME, 1,1) FROM world.city limit 10;</copy>
         ```
-    * Generate random numbers between 1 AND 200
-        ```
-        <span style="color:blue">mysql></span> <copy>SELECT gen_range(1, 200);</copy>
-        ```
-        ```
-        <span style="color:blue">mysql></span> <copy>SELECT gen_range(1, 200);</copy>
-        ```
-        ```
-        <span style="color:blue">mysql></span> <copy>SELECT gen_range(1, 200);</copy>
-        ```
     * Generate a random email address with a specified number of digits for the name and surname parts in the specified domain, mynet.com  
         ```
         <span style="color:blue">mysql></span> <copy>SELECT gen_rnd_email(6, 8, 'mynet.com');</copy>
         ```
-
+5. Create a masked view for city table
+    ```
+    <span style="color:blue">mysql></span> <copy>USE world;</copy>
+    ```
+    ```
+    <span style="color:blue">mysql></span> <copy>CREATE VIEW masked_city AS SELECT id, CAST(MASK_INNER(NAME, 1,1) AS CHAR(35)) AS name, CountryCode, District, CAST(GEN_RANGE(100000, 10000000) AS SIGNED) AS population FROM world.city;</copy>
+    ```
+    ```
+    <span style="color:blue">mysql></span> <copy>SELECT * FROM masked_city limit 5;</copy>
+    ```
+    
 
 ## Learn More
 * https://dev.mysql.com/doc/refman/8.0/en/firewall-installation.html

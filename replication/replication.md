@@ -37,7 +37,7 @@ In this lab, you will:
     <span style="color:green">shell-mysql2></span> <copy>/workshop/support/MySQL_Replication___Prepare_replica_server.sh</copy>
     ```
     ```
-    <span style="color:green">shell-mysql2></span> <copy>ls -l /mysql</copy>
+    <span style="color:green">shell-mysql2></span> <copy>sudo ls -l /mysql</copy>
     ```
 
 5. <span style="color:red">Close and reopen the SSH connection to mysql2 server</span> to let opc user have the new group.

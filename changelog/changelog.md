@@ -18,6 +18,19 @@ This bootcamp is constantly updated, here you ahve the list of changes to the la
 | May 6th, 2024 | Lab 1 | Task 1 | removed reference to pdf lab guides and added reference to ssh key files and server list assignment |
 | May 6th, 2024 | Lab2b | Task 1 | Added to step 7 instructions to close and reopen session |
 | May 6th, 2024 | Lab 6a | Task 1 | Fixed step5 (wrong server and wrong exit command) |
+| May 6th, 2024 | Lab 2d | Task 1 | Wrong title |
+| May 6th, 2024 | Lab 2d | Task 1 | Step 7 wrong exit command |
+| May 6th, 2024 | Lab 2d | Task 2 | Step 4 wrong command to switch to javascript |
+| May 6th, 2024 | Lab 3b | Task 1 | added exit from client at the end |
+| May 6th, 2024 | Lab 3b | Task 2 | added exit from client at the end |
+| May 6th, 2024 | Lab 4b | Task 1 | Split step 7 and swapped group creation and recording mode; updated numbering |
+| May 6th, 2024 | Lab 4b | Task 1 | Step 14, use set persist instead of set global |
+| May 6th, 2024 | Lab 6a | Task 1 | Step 4, added sudo to ls command |
+| May 6th, 2024 | Lab 2c | Task 1 and 2 | Swapped the two tasks; moved community remove to the end of task 2; removed hash -r |
+| May 6th, 2024 | Lab 4b | Task 3 | Reduced examples in step 5 |
+| May 6th, 2024 | Lab 4b | Task 3 | Added step 6 with view |
+| May 6th, 2024 | Lab 7a | Task 3 | Step 1, changed wrong description from mysql3 to mysql2 |
+
 
 
 

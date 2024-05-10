@@ -14,9 +14,37 @@ In this lab, you will:
 > **Note:** 
   * Server: mysql1
 
-## Task 1: Understand MySQL Connections
+## Task 1: Remove Community and import databases
 
-1. If not already connected, connect to mysql1 server through app-srv
+1. If not already connected, connect to mysql1 server thought app-srv
+    ```
+    <span style="color:green">shell-app-srv$</span> <copy>ssh -i $HOME/sshkeys/id_rsa_mysql1 opc@mysql1 </copy>
+    ```
+
+2. Import the world database, that will be used later, from c:\workshop\databases\world. You can do it with mysql client
+    ```
+    <span style="color:green">shell-mysql1></span> <copy>mysql -uadmin -p -P3307 -h mysql1 </workshop/databases/world/world.sql</copy>
+    ```
+
+3. Import the employees demo database that is in /workshop/databases folder.
+    ```
+    <span style="color:green">shell-mysql1></span> <copy>cd /workshop/databases/employees</copy>
+    ```
+    ```
+    <span style="color:green">shell-mysql1></span> <copy>mysql -uadmin -p -P3307 -h mysql1 < ./employees.sql</copy>
+    ```
+
+4. Check that we have now the world and employees demo databases in our instance  
+    ```
+    <span style="color:green">shell-mysql1></span> <copy>cd /workshop/databases/employees</copy>
+    ```
+    ```
+    <span style="color:green">shell-mysql1></span> <copy>mysql -uadmin -p -P3307 -h mysql1 -e "SHOW DATABASES"</copy>
+    ```
+
+## Task 2: Understand MySQL Connections
+
+1. Connect to mysql1 server through app-srv
     ```
     <span style="color:green">shell-app-srv$</span><copy>ssh -i $HOME/sshkeys/id_rsa_mysql1 opc@mysql1</copy>
     ```
@@ -27,7 +55,7 @@ In this lab, you will:
 
   Here we practice connecting in various way and check what is working and what is not (note: port 3310 is intentionally wrong).
 
-  2. Use the command in table below to test different connection strings and check the result. If the result is not clear to you, please ask an explanation to your instructor. Please note that “-p” lowercase refers to password, “-P” uppercase refer to the TCP port.
+2. Use the command in table below to test different connection strings and check the result. If the result is not clear to you, please ask an explanation to your instructor. Please note that “-p” lowercase refers to password, “-P” uppercase refer to the TCP port.
   Don’t be confused by the client version and check these lines, to understand “why” (not all are always available...)
   * Current user:
   * Connection:
@@ -44,39 +72,17 @@ In this lab, you will:
   | <span style="color:green">shell></span> mysql -u root -p -h **127.0.0.1** -P **3307** <br> <span style="color:blue"> mysql></span> status; |   |   |   |
   | <span style="color:green">shell></span> mysql -u **admin** -p -h **mysql1** -P **3307** <br> <span style="color:blue"> mysql></span> status; |   |   |   |
 
-
-## Task 2: Remove Community and import databases
-
-1. Now that we better understood how to connect, we can remove the community installation and refresh PATH cache 
+3. Now that we better understood how to connect, we can remove the community installation and refresh PATH cache 
     ```
     <span style="color:green">shell-mysql1></span> <copy>sudo yum remove mysql mysql-server</copy>
     ```
 
-2. Then refresh tha bash shell to not try to use the old installation
+4. Exit from mysql1 connection
     ```
-    <span style="color:green">shell-mysql1></span><copy>hash -r</copy>
-    ```
-
-3. Import the world database, that will be used later, from c:\workshop\databases\world. You can do it with mysql client
-    ```
-    <span style="color:green">shell-mysql1></span> <copy>mysql -uadmin -p -P3307 -h mysql1 </workshop/databases/world/world.sql</copy>
+    <span style="color:green">shell-mysql1></span><copy>exit</copy>
     ```
 
-4. Import the employees demo database that is in /workshop/databases folder.
-    ```
-    <span style="color:green">shell-mysql1></span> <copy>cd /workshop/databases/employees</copy>
-    ```
-    ```
-    <span style="color:green">shell-mysql1></span> <copy>mysql -uadmin -p -P3307 -h mysql1 < ./employees.sql</copy>
-    ```
 
-5. Check that we have now the world and employees demo databases in our instance  
-    ```
-    <span style="color:green">shell-mysql1></span> <copy>cd /workshop/databases/employees</copy>
-    ```
-    ```
-    <span style="color:green">shell-mysql1></span> <copy>mysql -uadmin -p -P3307 -h mysql1 -e "SHOW DATABASES"</copy>
-    ```
 
 ## Acknowledgements
 * **Author** - Marco Carlessi, Principal Sales Consultant

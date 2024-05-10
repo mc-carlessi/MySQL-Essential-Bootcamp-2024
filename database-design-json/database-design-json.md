@@ -162,6 +162,10 @@ In this lab, you will:
     ```
     <span style="color:blue">My</span><span style="color: orange">SQL </span><span style="background-color:yellow">JS</span>><copy>session.sql("show create table posts")</copy>
     ```
+13. Exit from client
+    ```
+    <span style="color:blue">mysql></span> <copy>\q</copy>
+    ```
 
 ## Acknowledgements
 * **Author** - Marco Carlessi, Principal Sales Consultant

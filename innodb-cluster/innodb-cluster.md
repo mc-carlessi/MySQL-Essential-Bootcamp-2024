@@ -264,7 +264,7 @@ In this lab, you will:
 
 
 ## Task 3: Add a second and third instance to the cluster
-1. Check the instance configuration on mysql3
+1. Check the instance configuration on mysql2
     ```
     <span style="color:blue">My</span><span style="color: orange">SQL </span><span style="background-color:yellow">JS</span>> <copy>dba.checkInstanceConfiguration('admin@mysql2:3307')</copy>
     ```
