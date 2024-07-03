@@ -119,7 +119,7 @@ In this lab, you will work with:
 
 14. Firewall messages rewuires to increase the default log level
     ```
-    <span style="color:blue">mysql></span> <copy>SET PERSIST log_error_verbosity=3</copy>
+    <span style="color:blue">mysql></span> <copy>SET PERSIST log_error_verbosity=3;</copy>
     ```
 
 15. <span style="color:red">fwtest connection:</span> Repeat a blocked command (it works? Why?)
@@ -203,12 +203,12 @@ In this lab, you will work with:
     <span style="color:blue">mysql></span> <copy>\q</copy>
     ```
 
-4. Open the audit.log file in the datadir and verify the content
+8. Open the audit.log file in the datadir and verify the content
     ```
     <span style="color:green">shell-mysql1></span> <copy>nano /mysql/data/audit.log</copy>
     ```
 
-5. For additional and more complex rules, you can check the documentation
+9. For additional and more complex rules, you can check the documentation
 
 
 ## Task 3: MySQL Enterprise Data Masking

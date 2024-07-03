@@ -7,14 +7,14 @@ Estimated Lab Time: 20 minutes
 
 ### Objectives
 In this lab, you will:
-* Understand better how MySQL connection works   
 * Install test databases for labs (world and employees)
 * Have a look on useful statements
+* Remove community software
 
 > **Note:** 
   * Server: mysql1
 
-## Task 1: Remove Community and import databases
+## Task 1: Import sample databases
 
 1. If not already connected, connect to mysql1 server thought app-srv
     ```
@@ -72,12 +72,14 @@ In this lab, you will:
   | <span style="color:green">shell></span> mysql -u root -p -h **127.0.0.1** -P **3307** <br> <span style="color:blue"> mysql></span> status; |   |   |   |
   | <span style="color:green">shell></span> mysql -u **admin** -p -h **mysql1** -P **3307** <br> <span style="color:blue"> mysql></span> status; |   |   |   |
 
-3. Now that we better understood how to connect, we can remove the community installation and refresh PATH cache 
+## Task 3: Remove Community installation
+
+1. Now that we better understood how to connect, we can remove the community installation and refresh PATH cache 
     ```
     <span style="color:green">shell-mysql1></span> <copy>sudo yum remove mysql mysql-server</copy>
     ```
 
-4. Exit from mysql1 connection
+2. Exit from mysql1 connection
     ```
     <span style="color:green">shell-mysql1></span><copy>exit</copy>
     ```

@@ -30,6 +30,11 @@ This bootcamp is constantly updated, here you ahve the list of changes to the la
 | May 6th, 2024 | Lab 4b | Task 3 | Reduced examples in step 5 |
 | May 6th, 2024 | Lab 4b | Task 3 | Added step 6 with view |
 | May 6th, 2024 | Lab 7a | Task 3 | Step 1, changed wrong description from mysql3 to mysql2 |
+| July 3rd, 2024 | Lab 2a | Task 1 | Fixed title of the task |
+| July 3rd, 2024 | Lab 2a | Introduction | Aligned objectives with the tasks |
+| July 3rd, 2024 | Lab 2a | Task 3 | Added Task 3, separating MySQL COmmunity removal from connections tests |
+| July 3rd, 2024 | Lab 4b | Task 1 | Added missing ";" at the end of sql command in step 14 |
+| July 3rd, 2024 | Lab 2b | Task 1 | Moved step 5 ("sudo mkdir /mysql/ /mysql/etc /mysql/data ...") after step 7  |
 
 
 

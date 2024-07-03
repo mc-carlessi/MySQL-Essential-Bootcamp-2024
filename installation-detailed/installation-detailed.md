@@ -48,12 +48,7 @@ Create a new user/group for your MySQL service (mysqluser/mysqlgrp) and a add â€
     <span style="color:green">shell-mysql1></span> <copy>sudo usermod -a -G mysqlgrp opc </copy>
     ```
 
-5. Create new directory structure:
-    ```
-    <span style="color:green">shell-mysql1></span> <copy>sudo mkdir /mysql/ /mysql/etc /mysql/data /mysql/log /mysql/temp /mysql/binlog</copy>
-    ```
-
-6. To simplify the lab, add the mysql bin folder to the bash profile and customize the client prompt.
+5. To simplify the lab, add the mysql bin folder to the bash profile and customize the client prompt.
 
     1.  Please insert these lines at the end of the file /home/opc/.bashrc
         You can edit the file with the editor that you prefer, here some examples: 
@@ -72,12 +67,17 @@ Create a new user/group for your MySQL service (mysqluser/mysqlgrp) and a add â€
         <copy>export MYSQL_PS1="\\u on \\h>\\_" </copy>
         ```
 
-7. <span style="color:red">Close the ssh session and reopen it to activate the new privilege and settings for opc user</span>
+6. <span style="color:red">Close the ssh session and reopen it to activate the new privilege and settings for opc user</span>
     ```
     <span style="color:green">shell-mysql1></span> <copy>exit</copy>
     ```
     ```
     <span style="color:green">shell-app-srv$</span> <copy>ssh -i $HOME/sshkeys/id_rsa_mysql1 opc@mysql1 </copy>
+    ```
+
+7. Create new directory structure:
+    ```
+    <span style="color:green">shell-mysql1></span> <copy>sudo mkdir /mysql/ /mysql/etc /mysql/data /mysql/log /mysql/temp /mysql/binlog</copy>
     ```
 
 8. Extract the tarball in your /mysql folder
@@ -90,7 +90,7 @@ Create a new user/group for your MySQL service (mysqluser/mysqlgrp) and a add â€
 
 9. Create a symbolic link to mysql binary installation
     ```
-    <span style="color:green">shell-mysql1></span> <copy>sudo ln -s mysql-commercial-8.0.*-linux-glibc2.12-x86_64 mysql-latest </copy>
+    <span style="color:green">shell-mysql1></span> <copy>sudo ln -s mysql-commercial-8.0.*-x86_64 mysql-latest </copy>
     ```
 
 10. Create a new configuration file <span style="color:red"> my.cnf </span> inside /mysql/etc
