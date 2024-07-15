@@ -36,18 +36,6 @@ secure-file-priv=/mysql/data
 innodb_flush_log_at_trx_commit=1
 innodb_buffer_pool_size=512M
 
-# MyISAM settings
-key_buffer_size=124M
-
-# Enable binary logs
-log-bin=/mysql/binlog/binlog
-binlog-format=row
-sync_binlog = 1
-
-# These two variables are deprecated with MySQL 8
-master-info-repository=TABLE
-relay-log-info-repository=TABLE
-
 # Enable GTID
 gtid-mode=on
 enforce-gtid-consistency=true
@@ -89,18 +77,6 @@ secure-file-priv=/mysql/data
 # InnoDB settings
 innodb_flush_log_at_trx_commit=1
 innodb_buffer_pool_size=512M
-
-# MyISAM settings
-key_buffer_size=124M
-
-# Enable binary logs
-log-bin=/mysql/binlog/binlog
-binlog-format=row
-sync_binlog = 1
-
-# These two variables are deprecated with MySQL 8
-master-info-repository=TABLE
-relay-log-info-repository=TABLE
 
 # Enable GTID
 gtid-mode=on
@@ -145,18 +121,6 @@ secure-file-priv=/mysql/data
 # InnoDB settings
 innodb_flush_log_at_trx_commit=1
 innodb_buffer_pool_size=512M
-
-# MyISAM settings
-key_buffer_size=124M
-
-# Enable binary logs
-log-bin=/mysql/binlog/binlog
-binlog-format=row
-sync_binlog = 1
-
-# These two variables are deprecated with MySQL 8
-master-info-repository=TABLE
-relay-log-info-repository=TABLE
 
 # Enable GTID
 gtid-mode=on

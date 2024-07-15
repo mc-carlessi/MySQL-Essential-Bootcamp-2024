@@ -35,6 +35,7 @@ This bootcamp is constantly updated, here you ahve the list of changes to the la
 | July 3rd, 2024 | Lab 2a | Task 3 | Added Task 3, separating MySQL COmmunity removal from connections tests |
 | July 3rd, 2024 | Lab 4b | Task 1 | Added missing ";" at the end of sql command in step 14 |
 | July 3rd, 2024 | Lab 2b | Task 1 | Moved step 5 ("sudo mkdir /mysql/ /mysql/etc /mysql/data ...") after step 7  |
+| July 15th, 2024 | Addendum Environment | .cnf files | Removed myisam settings, binary log enablement and settings (now enabled by default)  |
 
 
 
